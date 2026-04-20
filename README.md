@@ -3,7 +3,7 @@
 ### All of the links are ment to be used for NFC tags to help spread awareness.
 
 ### This whole branch is live for both addresses respectivly.
-https://jhernandez222.github.io/CALLED-TEST/testv1.html
+https://gbyac26.github.io/Called-App/Called.html
 
 ## All FILES.
 Called.html - GBYAC CALLED.
