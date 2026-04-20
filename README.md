@@ -1,4 +1,4 @@
-# Everything in the "CALLED-TEST" branch are W.I.P.
+# Everything in the "Called-App" branch are W.I.P.
 
 ### All of the links are ment to be used for NFC tags to help spread awareness.
 
