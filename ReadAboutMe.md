@@ -11,7 +11,7 @@ Called.html - GBYAC CALLED.
 ## ToDo List Possibilities.
 
 ### Called link Page
-- ~~Domain for GBYAC.com ~$11.~~ DONE
+- ~~Domain for GBYAC.com $11.08.~~ DONE
   - ~~Can be hosted on Github for free.~~ DONE
 - Add calander to front page?
 - More links?
