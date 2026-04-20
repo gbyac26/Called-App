@@ -1,7 +1,6 @@
 # Everything in the "Called-App" branch are W.I.P.
 
-#### All of the links are ment to be used for NFC tags to help spread awareness.
-
+### All of the links are ment to be used for NFC tags to help spread awareness.
 ### This whole branch is live for all addresses respectivly.
 
 # **!!!GBYAC.com IS LIVE!!!**
