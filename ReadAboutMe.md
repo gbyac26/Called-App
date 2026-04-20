@@ -3,13 +3,13 @@
 ### This whole branch is live for all addresses respectivly.
 
 # **!!!GBYAC.com IS LIVE!!!**
-###### License is CC
+##### License is CC
 
 ## All FILES.
 ###### index.md = Landing page.
-###### readme.md = Landing page.
-###### Pegasus.html = meme.
-###### Called.html = Origional link.
+##### readme.md = Landing page.
+##### Pegasus.html = meme.
+##### Called.html = Origional link.
 
 ## ToDo List Possibilities.
 ### Called link Page
