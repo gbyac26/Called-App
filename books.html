@@ -9573,6 +9573,17 @@ function clearSearch() {
   clearBtn.style.display = "none";
   filterBooks();
 }
+
+
+
+/* ✅ BOOK COUNTER (RUNS AFTER PAGE LOADS) */
+window.onload = function () {
+  const books = document.getElementsByClassName("book").length;
+  document.getElementById("bookCount").textContent =
+    "Books: " + books;
+};
+
+  
 </script>
 
 </body>
