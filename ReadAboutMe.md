@@ -5,11 +5,18 @@
 # **!!!GBYAC.com IS LIVE!!!**
 ##### License is CC
 
+## All FOLDERS.
+##### pdf = PDF storage.
+##### images = Picture storage.
+##### Parts to Create Books page = Files for books page creation.
+
 ## All FILES.
 ##### index.md = Landing page.
 ##### readme.md = Landing page.
-##### Pegasus.html = meme.
+##### Pegasus.html = Meme.
 ##### Called.html = Origional link.
+##### books.html = Links to books!
+##### define.html = Definition/image test
 
 ## ToDo List Possibilities.
 ### Called link Page
@@ -17,6 +24,7 @@
   - ~~Can be hosted on Github for free.~~ DONE
 - Add calander to front page?
 - More links?
-- Pictures/Logo?
+- Pictures/Logo? kinda
 - ~~Create personal or GBYAC Github.~~ DONE
 - Instagram feed?
+- ~~Books!~~ DONE
