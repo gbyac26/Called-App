@@ -12,9 +12,7 @@ HTML_START = """<!DOCTYPE html>
 <title>Catholic Library</title>
 
 <style>
-* {
-  box-sizing: border-box; /* ✅ CRITICAL FIX */
-}
+* { box-sizing: border-box; }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
@@ -33,7 +31,6 @@ body {
   box-shadow: 0 8px 20px rgba(0,0,0,.08);
 }
 
-/* ✅ SEARCH BAR */
 .search-wrapper {
   position: relative;
   margin-bottom: 16px;
@@ -45,7 +42,6 @@ body {
   font-size: 15px;
   border-radius: 10px;
   border: 1px solid #ccc;
-  outline: none;
 }
 
 .search-wrapper button {
@@ -58,10 +54,8 @@ body {
   font-size: 20px;
   cursor: pointer;
   display: none;
-  line-height: 1;
 }
 
-/* ✅ BOOK LIST */
 .library {
   display: flex;
   flex-direction: column;
@@ -86,10 +80,8 @@ body {
   font-weight: 600;
 }
 
-/* ✅ HIGHLIGHT */
 mark {
   background: #ffeb3b;
-  padding: 0;
 }
 </style>
 </head>
@@ -99,12 +91,7 @@ mark {
   <h1>Catholic Library</h1>
 
   <div class="search-wrapper">
-    <input
-      type="text"
-      id="searchInput"
-      placeholder="Search books..."
-      oninput="filterBooks()"
-    />
+    <input id="searchInput" placeholder="Search books..." oninput="filterBooks()">
     <button id="clearBtn" onclick="clearSearch()">×</button>
   </div>
 
@@ -117,38 +104,32 @@ HTML_END = """
 
 <script>
 function filterBooks() {
-  const input = document.getElementById("searchInput");
-  const filter = input.value.toLowerCase();
-  const books = document.getElementsByClassName("book");
-  const clearBtn = document.getElementById("clearBtn");
+  const q = searchInput.value.toLowerCase();
+  clearBtn.style.display = q ? "block" : "none";
 
-  clearBtn.style.display = filter ? "block" : "none";
+  document.querySelectorAll(".book").forEach(b => {
+    const t = b.querySelector(".title");
+    const text = t.textContent;
+    t.innerHTML = text;
 
-  for (let book of books) {
-    const titleEl = book.querySelector(".title");
-    const text = titleEl.textContent;
-    titleEl.innerHTML = text;
-
-    if (text.toLowerCase().includes(filter)) {
-      book.style.display = "";
-      if (filter) {
-        const regex = new RegExp("(" + escapeRegExp(filter) + ")", "ig");
-        titleEl.innerHTML = text.replace(regex, "<mark>$1</mark>");
+    if (text.toLowerCase().includes(q)) {
+      b.style.display = "";
+      if (q) {
+        t.innerHTML = text.replace(
+          new RegExp("(" + q.replace(/[.*+?^${}()|[\\]\\\\]/g,"\\\\$&") + ")", "ig"),
+          "<mark>$1</mark>"
+        );
       }
     } else {
-      book.style.display = "none";
+      b.style.display = "none";
     }
-  }
+  });
 }
 
 function clearSearch() {
-  document.getElementById("searchInput").value = "";
-  document.getElementById("clearBtn").style.display = "none";
+  searchInput.value = "";
+  clearBtn.style.display = "none";
   filterBooks();
-}
-
-function escapeRegExp(string) {
-  return string.replace(/[.*+?^${}()|[\\]\\\\]/g, "\\\\$&");
 }
 </script>
 
@@ -158,19 +139,22 @@ function escapeRegExp(string) {
 
 # ---------- PARSING ----------
 url_re = re.compile(r"https?://[^\s\)\]]+")
-html_tag_re = re.compile(r"<[^>]+>")
+html_re = re.compile(r"<[^>]+>")
 
-seen_urls = set()
+seen = set()
 books = []
-current_title = "Unknown title"
+current_title = None
+
+def is_youtube(url: str) -> bool:
+    return "youtube.com" in url or "youtu.be" in url
 
 with open(INPUT_FILE, "r", encoding="utf-8", errors="ignore") as f:
-    for raw_line in f:
-        line = raw_line.strip()
+    for line in f:
+        line = line.strip()
         if not line:
             continue
 
-        clean = html_tag_re.sub("", line)
+        clean = html_re.sub("", line)
 
         if not clean.startswith("http"):
             clean = url_re.sub("", clean).strip(" –:-")
@@ -178,12 +162,13 @@ with open(INPUT_FILE, "r", encoding="utf-8", errors="ignore") as f:
                 current_title = clean
 
         for url in url_re.findall(line):
-            if url in seen_urls:
-                continue
-            seen_urls.add(url)
-            books.append((escape(current_title), url))
+            if is_youtube(url):
+                continue  # ✅ skip YouTube links
+            if url not in seen and current_title:
+                seen.add(url)
+                books.append((escape(current_title), url))
 
-# ---------- WRITE OUTPUT ----------
+# ---------- WRITE FILE ----------
 with open(OUTPUT_FILE, "w", encoding="utf-8") as out:
     out.write(HTML_START)
     for title, url in books:
@@ -194,4 +179,4 @@ with open(OUTPUT_FILE, "w", encoding="utf-8") as out:
         )
     out.write(HTML_END)
 
-print(f"✅ Generated {len(books)} unique books into {OUTPUT_FILE}")
+print(f"✅ Generated {len(books)} unique books (YouTube excluded) into {OUTPUT_FILE}")
