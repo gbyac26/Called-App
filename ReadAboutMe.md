@@ -3,7 +3,7 @@
 #### This whole branch is live for all addresses respectivly.
 
 # **!!!GBYAC.com IS LIVE!!!**
-##### License is CC
+##### License is CC.
 
 ## All FOLDERS.
 ##### pdf = PDF storage.
@@ -24,7 +24,7 @@
   - ~~Can be hosted on Github for free.~~ DONE
 - Add calander to front page?
 - More links?
-- Pictures/Logo? kinda
+- Pictures/Logo? kinda.
 - ~~Create personal or GBYAC Github.~~ DONE
 - Instagram feed?
 - ~~Books!~~ DONE
