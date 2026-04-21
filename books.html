@@ -11,33 +11,44 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
       background: #ffe888;
       margin: 0;
-      padding: 24px;
+      padding: 20px;
       color: #1c1c1e;
     }
 
     .card {
-      max-width: 600px;
+      max-width: 1100px;
       margin: auto;
       background: #ffffff;
       border-radius: 16px;
-      padding: 24px;
+      padding: 20px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.08);
     }
 
     h1 {
-      font-size: 22px;
-      margin-bottom: 16px;
+      font-size: 20px;
+      margin-bottom: 14px;
     }
 
+    /* ✅ GRID FOR HUNDREDS OF BOOKS */
+    .library {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 10px;
+    }
+
+    /* ✅ SMALL BOOK TILES */
     a.pdf-link {
       display: block;
-      text-decoration: none;
-      padding: 14px 16px;
-      margin-bottom: 12px;
-      border-radius: 12px;
+      padding: 10px 12px;
       background: #f2f2f7;
+      border-radius: 10px;
+      text-decoration: none;
       color: #000;
+      font-size: 14px;
       font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     a.pdf-link:hover {
@@ -51,23 +62,68 @@
   <div class="card">
     <h1>📄 Document Library</h1>
 
-    <a class="pdf-link" href="pdf/LivesOfTheSaintsSelected.pdf" target="_blank">
-      Lives of the Saints
-    </a>
+    <div class="library">
 
-    <a class="pdf-link" href="The-Story-of-a-Soul.pdf" target="_blank">
-      Story of a Soul
-    </a>
+      <!-- ✅ BOOK SLOT 001 -->
+      <a class="pdf-link" href="pdf/LivesOfTheSaintsSelected.pdf" target="_blank">
+        Lives of the Saints
+      </a>
 
-    <a class="pdf-link" href="pdf/TheLadderofDivineAscent.pdf" target="_blank">
-      The Ladder of Divine Ascent
-    </a>
+      <!-- ✅ BOOK SLOT 002 -->
+      <a class="pdf-link" href="pdf/The-Story-of-a-Soul.pdf" target="_blank">
+        Story of a Soul
+      </a>
 
-    <a class="pdf-link" href="pdf/ascentcarmel.pdf" target="_blank">
-      Ascent of Mt. Carmel.pdf
-    </a>
+      <!-- ✅ BOOK SLOT 003 -->
+      <a class="pdf-link" href="pdf/TheLadderofDivineAscent.pdf" target="_blank">
+        The Ladder of Divine Ascent
+      </a>
 
+      <!-- ✅ BOOK SLOT 004 -->
+      <a class="pdf-link" href="pdf/ascentcarmel.pdf" target="_blank">
+        Ascent of Mt. Carmel
+      </a>
+
+      <!-- ✅ BOOK SLOT 005 -->
+      <a class="pdf-link" href="#" target="_blank">
+        Book Title 005
+      </a>
+
+      <!-- ✅ BOOK SLOT 006 -->
+      <a class="pdf-link" href="#" target="_blank">
+        Book Title 006
+      </a>
+
+      <!-- ✅ BOOK SLOT 007 -->
+      <a class="pdf-link" href="#" target="_blank">
+        Book Title 007
+      </a>
+
+      <!-- ✅ BOOK SLOT 008 -->
+      <a class="pdf-link" href="#" target="_blank">
+        Book Title 008
+      </a>
+
+      <!-- ✅ BOOK SLOT 009 -->
+      <a class="pdf-link" href="#" target="_blank">
+        Book Title 009
+      </a>
+
+      <!-- ✅ BOOK SLOT 010 -->
+      <a class="pdf-link" href="#" target="_blank">
+        Book Title 010
+      </a>
+
+      <!-- 🔁 CONTINUE COPYING UP TO SLOT 100 -->
+      <!-- ✅ BOOK SLOT 011 -->
+      <!-- ✅ BOOK SLOT 012 -->
+      <!-- ✅ BOOK SLOT 013 -->
+      <!-- ... -->
+      <!-- ✅ BOOK SLOT 100 -->
+
+    </div>
   </div>
 
 </body>
 </html>
+``
