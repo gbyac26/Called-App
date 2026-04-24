@@ -20,11 +20,22 @@
 
 ## ToDo List Possibilities.
 ### Called link Page
-- ~~Domain for GBYAC.com $11.08.~~ DONE
-  - ~~Can be hosted on Github for free.~~ DONE
-- Add calander to front page?
-- More links?
-- Pictures/Logo? kinda.
-- ~~Create personal or GBYAC Github.~~ DONE
-- Instagram feed?
-- ~~Books!~~ DONE
+##### - ~~Domain for GBYAC.com $11.08.~~ DONE
+#####   - ~~Can be hosted on Github for free.~~ DONE
+##### - Add calander to front page?
+##### - More links?
+##### - Pictures/Logo? kinda.
+##### - ~~Create personal or GBYAC Github.~~ DONE
+##### - Instagram feed?
+##### - ~~Books!~~ DONE
+
+## Landing Page Ideas
+##### Calander of events / how to scrape called for events.
+##### Instagram top 3 post embeded.
+##### possible links / link to library.
+##### An about GBYAC
+##### Background color 
+
+Sharing events for Catholics 18-30(ish)
+Not affiliated with any parish or diocese
+Submit an event or join our group!
