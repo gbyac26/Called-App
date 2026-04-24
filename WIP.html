@@ -56,7 +56,7 @@ body {
   background: #f2f2f7;
 }
 
-/* ===== MOBILE MENU ROW ===== */
+/* ===== MOBILE MENU ===== */
 .menu-row {
   display: flex;
   align-items: center;
@@ -64,7 +64,6 @@ body {
   margin-bottom: 10px;
 }
 
-/* 3 DOT BUTTON */
 .menu-btn {
   display: none;
   font-size: 26px;
@@ -72,31 +71,18 @@ body {
   padding: 10px 14px;
   background: #f2f2f7;
   border-radius: 10px;
-  width: fit-content;
 }
 
-/* TEXT NEXT TO DOTS */
 .menu-text {
   font-size: 14px;
   color: #6b6b6b;
   cursor: pointer;
-  user-select: none;
 }
 
-/* mobile sidebar behavior */
 @media (max-width: 900px) {
-
-  .menu-btn {
-    display: block;
-  }
-
-  .sidebar-links {
-    display: none;
-  }
-
-  .sidebar.open .sidebar-links {
-    display: block;
-  }
+  .menu-btn { display: block; }
+  .sidebar-links { display: none; }
+  .sidebar.open .sidebar-links { display: block; }
 }
 
 /* ===== CALENDAR ===== */
@@ -152,34 +138,20 @@ body {
   margin-top: 6px;
 }
 
-.empty {
-  background: transparent;
-}
-
-/* ===== INSTAGRAM ===== */
-.instagram-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 16px;
-}
-
-.instagram-placeholder {
-  background: #f2f2f7;
-  border-radius: 14px;
-  padding: 40px 20px;
+/* ===== FOOTER ===== */
+.footer {
   text-align: center;
-  color: #666;
+  font-size: 12px;
+  color: #6b6b6b;
+  margin: 20px 0;
 }
 
-/* ===== FULL IMAGE ===== */
+/* ===== IMAGE ===== */
 .full-image {
   width: 100%;
   max-width: 1200px;
-  height: auto;
   display: block;
   margin: 30px auto 0 auto;
-  border-radius: 0;
-  box-shadow: none;
 }
 </style>
 </head>
@@ -193,7 +165,6 @@ body {
     <h1>Green Bay Young Adult Catholic</h1>
     <p>Sharing events for Catholics 18–30(ish)</p>
     <p>Not affiliated with any parish or diocese</p>
-    <p>Submit an event or join our group!</p>
   </div>
 
   <div class="layout">
@@ -201,7 +172,6 @@ body {
     <!-- SIDEBAR -->
     <aside class="card sidebar" id="sidebar">
 
-      <!-- MENU (3 DOTS + TEXT) -->
       <div class="menu-row">
         <div class="menu-btn" onclick="toggleMenu()">⋯</div>
         <div class="menu-text" onclick="toggleMenu()">Click for links</div>
@@ -209,15 +179,8 @@ body {
 
       <div class="sidebar-links">
         <a class="nav-link" href="#">Submit an Event</a>
-
-        <a class="nav-link" href="https://gbyac.com/Called.html">
-          Join Our Group
-        </a>
-
-        <a class="nav-link" href="https://gbyac.com/books">
-          Catholic Library
-        </a>
-
+        <a class="nav-link" href="https://gbyac.com/Called.html">Join Our Group</a>
+        <a class="nav-link" href="https://gbyac.com/books">Catholic Library</a>
         <a class="nav-link" href="#">Contact</a>
       </div>
 
@@ -226,7 +189,6 @@ body {
     <!-- MAIN -->
     <main>
 
-      <!-- CALENDAR -->
       <div class="card">
 
         <div class="calendar-header">
@@ -244,47 +206,58 @@ body {
 
       </div>
 
-      <!-- INSTAGRAM -->
-      <div class="card">
-        <h2>From Instagram</h2>
-        <div class="instagram-grid">
-
-          <div class="instagram-placeholder">Embed Post 1</div>
-          <div class="instagram-placeholder">Embed Post 2</div>
-          <div class="instagram-placeholder">Embed Post 3</div>
-
-        </div>
-      </div>
-
     </main>
   </div>
-
 </div>
 
-<!-- FULL WIDTH IMAGE -->
-<img
-  src="images/Screenshot_20260420_1330221_Instagram.jpg"
-  alt="GBYAC Highlight"
-  class="full-image"
-/>
+<!-- IMAGE -->
+<img src="images/Screenshot_20260420_1330221_Instagram.jpg" class="full-image">
+
+<!-- FOOTER -->
+<div class="footer">
+  Powered by Jesus Christ
+</div>
 
 <script>
+
+/* =========================
+   MOBILE MENU
+========================= */
 function toggleMenu() {
   document.getElementById("sidebar").classList.toggle("open");
 }
 
-const events = {
-  <!-- Single -->
-  "2026-04-24": [
-    "Theology on Tap<br>6:30 PM – Green Bay Distillery"
-  ]
-  <!-- Multi -->
-    "2026-04-18": [
-    "Bible Study<br>7:00 PM – Parish Hall",
-    "Social Night<br>8:30 PM – Youth Room"
+/* =========================
+   1. ONE-TIME EVENTS
+========================= */
+const oneTimeEvents = {
+  "2026-04-14": [
+    "Young Adult Mass<br>6:30 PM – St. Mary’s Church"
+  ],
+  "2026-04-18": [
+    "Retreat Night<br>7:00 PM – Parish Hall"
   ]
 };
 
+/* =========================
+   2. RECURRING EVENTS
+========================= */
+const recurringEvents = [
+  {
+    name: "Bible Study<br>7:00 PM – Parish Hall",
+    dayOfWeek: 4, // Thursday
+    excludeDates: ["2026-05-01"]
+  },
+  {
+    name: "Sunday Fellowship<br>After Mass",
+    dayOfWeek: 0, // Sunday
+    excludeDates: []
+  }
+];
+
+/* =========================
+   CALENDAR SETUP
+========================= */
 let currentDate = new Date();
 
 const months = [
@@ -292,6 +265,9 @@ const months = [
   "July","August","September","October","November","December"
 ];
 
+/* =========================
+   RENDER CALENDAR
+========================= */
 function renderCalendar() {
 
   const year = currentDate.getFullYear();
@@ -308,7 +284,7 @@ function renderCalendar() {
 
   for (let i = 0; i < firstDay; i++) {
     const empty = document.createElement("div");
-    empty.className = "day empty";
+    empty.className = "day";
     calendar.appendChild(empty);
   }
 
@@ -319,33 +295,52 @@ function renderCalendar() {
       String(month + 1).padStart(2, '0') + "-" +
       String(d).padStart(2, '0');
 
+    const dateObj = new Date(dateStr);
+    const weekday = dateObj.getDay();
+
     const day = document.createElement("div");
     day.className = "day";
 
     let html = `<span>${d}</span>`;
 
-    if (events[dateStr]) {
-      events[dateStr].forEach(ev => {
+    /* =========================
+       A) ONE-TIME EVENTS
+    ========================= */
+    if (oneTimeEvents[dateStr]) {
+      oneTimeEvents[dateStr].forEach(ev => {
         html += `<div class="event">${ev}</div>`;
       });
     }
+
+    /* =========================
+       B) RECURRING EVENTS
+    ========================= */
+    recurringEvents.forEach(ev => {
+
+      const matchDay = ev.dayOfWeek === weekday;
+      const excluded = ev.excludeDates.includes(dateStr);
+
+      if (matchDay && !excluded) {
+        html += `<div class="event">${ev.name}</div>`;
+      }
+    });
 
     day.innerHTML = html;
     calendar.appendChild(day);
   }
 }
 
+/* =========================
+   MONTH CHANGE
+========================= */
 function changeMonth(dir) {
   currentDate.setMonth(currentDate.getMonth() + dir);
   renderCalendar();
 }
 
 renderCalendar();
+
 </script>
 
-<div style="text-align:center; font-size:12px; color:#6b6b6b; margin:20px 0;">
-  Powered by Jesus Christ
-</div>
-  
 </body>
 </html>
