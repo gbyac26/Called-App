@@ -68,7 +68,6 @@ html, body {
 ========================= */
 .sidebar {
   position: relative;
-  max-width: 100%;
 }
 
 .nav-link {
@@ -80,7 +79,7 @@ html, body {
 }
 
 /* =========================
-   MOBILE MENU
+   MENU
 ========================= */
 .menu-row {
   display: flex;
@@ -148,7 +147,6 @@ html, body {
   padding: 8px;
   min-height: 110px;
   font-size: 13px;
-  min-width: 0;
 }
 
 .day span {
@@ -167,12 +165,8 @@ html, body {
 }
 
 /* =========================
-   INSTAGRAM SECTION (ADDED)
+   INSTAGRAM
 ========================= */
-.instagram-card h2 {
-  margin-bottom: 10px;
-}
-
 .instagram-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -199,17 +193,7 @@ html, body {
 }
 
 /* =========================
-   IMAGE
-========================= */
-.full-image {
-  width: 100%;
-  max-width: 1200px;
-  display: block;
-  margin: 30px auto 0 auto;
-}
-
-/* =========================
-   MOBILE CALENDAR FIX
+   MOBILE FIXES
 ========================= */
 @media (max-width: 900px) {
 
@@ -305,16 +289,14 @@ html, body {
 
       </div>
 
-      <!-- INSTAGRAM (ADDED BACK) -->
-      <div class="card instagram-card">
+      <!-- INSTAGRAM -->
+      <div class="card">
         <h2>From Instagram</h2>
 
         <div class="instagram-grid">
-
-          <div class="instagram-embed">Instagram Embed 1</div>
-          <div class="instagram-embed">Instagram Embed 2</div>
-          <div class="instagram-embed">Instagram Embed 3</div>
-
+          <div class="instagram-embed">Embed 1</div>
+          <div class="instagram-embed">Embed 2</div>
+          <div class="instagram-embed">Embed 3</div>
         </div>
       </div>
 
@@ -332,12 +314,16 @@ html, body {
 
 <script>
 
-/* MENU */
+/* =========================
+   MENU
+========================= */
 function toggleMenu() {
   document.getElementById("sidebar").classList.toggle("open");
 }
 
-/* EVENTS */
+/* =========================
+   EVENTS
+========================= */
 const multiDateEvents = [
   {
     name: "Theology on Tap<br>6:30 PM – Green Bay Distillery",
@@ -361,12 +347,14 @@ const recurringEvents = [
     name: "Sunday Fellowship<br>After Mass",
     dayOfWeek: 0,
     startDate: "2026-04-01",
-    occurrences: null,
+    occurrences: 6,
     excludeDates: []
   }
 ];
 
-/* CALENDAR */
+/* =========================
+   CALENDAR
+========================= */
 let currentDate = new Date();
 
 const months = [
@@ -407,15 +395,43 @@ function renderCalendar() {
 
     let html = `<span>${d}</span>`;
 
+    /* MULTI-DATE */
     multiDateEvents.forEach(ev => {
       if (ev.dates.includes(dateStr)) {
         html += `<div class="event">${ev.name}</div>`;
       }
     });
 
+    /* RECURRING (FULL RESTORED LOGIC) */
     recurringEvents.forEach(ev => {
+
       const start = new Date(ev.startDate);
-      if (dateObj >= start && weekday === ev.dayOfWeek) {
+      const afterStart = dateObj >= start;
+      const isMatch = weekday === ev.dayOfWeek;
+      const excluded = ev.excludeDates.includes(dateStr);
+
+      if (!afterStart || !isMatch || excluded) return;
+
+      // COUNT OCCURRENCES
+      let count = 0;
+      let temp = new Date(ev.startDate);
+
+      while (temp <= dateObj) {
+
+        const tempStr = temp.toISOString().split("T")[0];
+
+        if (
+          temp.getDay() === ev.dayOfWeek &&
+          !ev.excludeDates.includes(tempStr) &&
+          temp >= start
+        ) {
+          count++;
+        }
+
+        temp.setDate(temp.getDate() + 1);
+      }
+
+      if (ev.occurrences === null || count <= ev.occurrences) {
         html += `<div class="event">${ev.name}</div>`;
       }
     });
@@ -425,6 +441,7 @@ function renderCalendar() {
   }
 }
 
+/* NAV */
 function changeMonth(dir) {
   currentDate.setMonth(currentDate.getMonth() + dir);
   renderCalendar();
