@@ -221,47 +221,50 @@ body {
 <script>
 
 /* =========================
-   MENU TOGGLE
+   MENU
 ========================= */
 function toggleMenu() {
   document.getElementById("sidebar").classList.toggle("open");
 }
 
 /* =========================
-   ONE-TIME EVENTS
+   1. MULTI-DATE EVENTS
+   (same event on multiple chosen dates)
 ========================= */
-const oneTimeEvents = {
-  "2026-04-14": [
-    "Young Adult Mass<br>6:30 PM – St. Mary’s Church"
-  ],
-  "2026-04-18": [
-    "Retreat Night<br>7:00 PM – Parish Hall"
-  ]
-};
+const multiDateEvents = [
+  {
+    name: "Young Adult Mass<br>6:30 PM – St. Mary’s Church",
+    dates: [
+      "2026-04-14",
+      "2026-04-21",
+      "2026-04-28"
+    ]
+  }
+];
 
 /* =========================
-   RECURRING EVENTS
-   - infinite OR limited
+   2. RECURRING EVENTS
+   - weekly or limited
 ========================= */
 const recurringEvents = [
   {
-    name: "Bible Study<br>7:00 PM – St.Peter & Paul",
-    dayOfWeek: 4,          // Thursday
+    name: "Bible Study<br>7:00 PM – Parish Hall",
+    dayOfWeek: 4,
     startDate: "2026-04-01",
-    occurrences: null,        // stops after null times null = infinite
+    occurrences: 6, // null = infinite
     excludeDates: []
   },
   {
     name: "Sunday Fellowship<br>After Mass",
-    dayOfWeek: 0,          // Sunday
+    dayOfWeek: 0,
     startDate: "2026-04-01",
-    occurrences: 6,     // stops after 6 times
+    occurrences: null,
     excludeDates: []
   }
 ];
 
 /* =========================
-   CALENDAR SETUP
+   CALENDAR
 ========================= */
 let currentDate = new Date();
 
@@ -271,7 +274,7 @@ const months = [
 ];
 
 /* =========================
-   RENDER CALENDAR
+   RENDER
 ========================= */
 function renderCalendar() {
 
@@ -309,27 +312,27 @@ function renderCalendar() {
     let html = `<span>${d}</span>`;
 
     /* =========================
-       ONE-TIME EVENTS
+       A) MULTI-DATE EVENTS
     ========================= */
-    if (oneTimeEvents[dateStr]) {
-      oneTimeEvents[dateStr].forEach(ev => {
-        html += `<div class="event">${ev}</div>`;
-      });
-    }
+    multiDateEvents.forEach(ev => {
+      if (ev.dates.includes(dateStr)) {
+        html += `<div class="event">${ev.name}</div>`;
+      }
+    });
 
     /* =========================
-       RECURRING EVENTS
+       B) RECURRING EVENTS
     ========================= */
     recurringEvents.forEach(ev => {
 
       const start = new Date(ev.startDate);
       const afterStart = dateObj >= start;
-      const isMatchDay = weekday === ev.dayOfWeek;
-      const isExcluded = ev.excludeDates.includes(dateStr);
+      const isMatch = weekday === ev.dayOfWeek;
+      const excluded = ev.excludeDates.includes(dateStr);
 
-      if (!afterStart || !isMatchDay || isExcluded) return;
+      if (!afterStart || !isMatch || excluded) return;
 
-      // If limited occurrences
+      // limited occurrences
       if (ev.occurrences !== null) {
 
         let count = 0;
@@ -353,7 +356,7 @@ function renderCalendar() {
         }
 
       } else {
-        // infinite recurring
+        // infinite repeat
         html += `<div class="event">${ev.name}</div>`;
       }
     });
