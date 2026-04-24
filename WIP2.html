@@ -319,35 +319,45 @@ function toggleMenu() {
 }
 
 /* =========================
-   MULTI-DATE EVENTS
+   1. MULTI-DATE EVENTS
+   (same event on multiple chosen dates)
 ========================= */
 const multiDateEvents = [
   {
-    name: "Young Adult Mass<br>6:30 PM – St. Mary’s Church",
+    name: "Theology on Tap<br>6:30 PM – Green Bay Distillery",
     dates: [
       "2026-04-14",
       "2026-04-21",
       "2026-04-28"
     ]
+  },
+    {
+    name: "Courpus Christi<br>6:30 PM – OLOL",
+    dates: [
+      "2026-04-5",
+      "2026-04-23",
+      "2026-04-25"
+    ]
   }
 ];
 
 /* =========================
-   RECURRING EVENTS
+   2. RECURRING EVENTS
+   - weekly or limited
 ========================= */
 const recurringEvents = [
   {
-    name: "Bible Study<br>7:00 PM – Parish Hall",
+    name: "Bible Study<br>7:00 PM – St.Peter & Paul",
     dayOfWeek: 4,
     startDate: "2026-04-01",
-    occurrences: 6,
+    occurrences: null, // null = infinite
     excludeDates: []
   },
   {
     name: "Sunday Fellowship<br>After Mass",
     dayOfWeek: 0,
     startDate: "2026-04-01",
-    occurrences: null,
+    occurrences: null, // # is # of repeating
     excludeDates: []
   }
 ];
