@@ -49,17 +49,7 @@ body {
   background: #f2f2f7;
 }
 
-/* FEATURE IMAGE */
-.feature-image {
-  width: 100%;
-  max-width: 900px;
-  border-radius: 16px;
-  display: block;
-  margin: 0 auto;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-}
-
-/* CALENDAR */
+/* ===== CALENDAR ===== */
 .calendar-header {
   display: flex;
   justify-content: space-between;
@@ -120,7 +110,7 @@ body {
   background: transparent;
 }
 
-/* INSTAGRAM */
+/* ===== INSTAGRAM ===== */
 .instagram-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -134,6 +124,29 @@ body {
   text-align: center;
   color: #666;
 }
+
+/* ===== BOTTOM IMAGE (NEW) ===== */
+.feature-wrapper {
+  padding: 0;
+  overflow: hidden;
+}
+
+.feature-image {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: 160px;   /* ≈ 1/6 visual feel on desktop */
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+
+/* Slightly bigger on small screens */
+@media (max-width: 900px) {
+  .feature-image {
+    max-height: 220px;
+  }
+}
 </style>
 </head>
 
@@ -145,18 +158,6 @@ body {
   <div class="card hero">
     <h1>Green Bay Young Adult Catholic</h1>
     <p>Connecting Catholics ages 18–30(ish)</p>
-  </div>
-
-  <!-- FEATURE IMAGE -->
-  <div class="card">
-    <img
-      src="images/Screenshot_20260420_1330221_Instagram.jpg"
-      alt="GBYAC Highlight"
-      class="feature-image"
-    >
-    <p style="text-align:center; margin-top:10px; font-size:14px; color:#666;">
-      Recent highlight from our community
-    </p>
   </div>
 
   <div class="layout">
@@ -232,6 +233,15 @@ body {
     </main>
   </div>
 
+  <!-- BOTTOM IMAGE (MOVED HERE) -->
+  <div class="card feature-wrapper">
+    <img
+      src="images/Screenshot_20260420_1330221_Instagram.jpg"
+      alt="GBYAC Highlight"
+      class="feature-image"
+    >
+  </div>
+
   <div style="text-align:center; margin-top:20px; font-size:13px; color:#888;">
     Powered by Jesus Christ
   </div>
@@ -255,6 +265,7 @@ const months = [
 ];
 
 function renderCalendar() {
+
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
 
@@ -274,6 +285,7 @@ function renderCalendar() {
   }
 
   for (let d = 1; d <= daysInMonth; d++) {
+
     const dateStr =
       year + "-" +
       String(month + 1).padStart(2, '0') + "-" +
@@ -300,7 +312,6 @@ function changeMonth(direction) {
   renderCalendar();
 }
 
-// INIT
 renderCalendar();
 </script>
 
