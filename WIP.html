@@ -245,17 +245,17 @@ const oneTimeEvents = {
 ========================= */
 const recurringEvents = [
   {
-    name: "Bible Study<br>7:00 PM – Parish Hall",
+    name: "Bible Study<br>7:00 PM – St.Peter & Paul",
     dayOfWeek: 4,          // Thursday
     startDate: "2026-04-01",
-    occurrences: 6,        // stops after 6 times
+    occurrences: null,        // stops after null times null = infinite
     excludeDates: []
   },
   {
     name: "Sunday Fellowship<br>After Mass",
     dayOfWeek: 0,          // Sunday
     startDate: "2026-04-01",
-    occurrences: null,     // null = infinite
+    occurrences: 6,     // stops after 6 times
     excludeDates: []
   }
 ];
