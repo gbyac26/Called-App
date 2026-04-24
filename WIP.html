@@ -6,13 +6,26 @@
 <title>Green Bay Young Adult Catholic</title>
 
 <style>
-body {
+
+/* =========================
+   GLOBAL SAFETY FIX
+========================= */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
   margin: 0;
+  overflow-x: hidden;
+  width: 100%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
   background: #ffe888;
   color: #1c1c1e;
 }
 
+/* =========================
+   LAYOUT
+========================= */
 .container {
   max-width: 1200px;
   margin: auto;
@@ -26,10 +39,15 @@ body {
 }
 
 @media (max-width: 900px) {
-  .layout { grid-template-columns: 1fr; }
+  .layout {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
 }
 
-/* ===== CARD ===== */
+/* =========================
+   CARDS
+========================= */
 .card {
   background: #fff;
   border-radius: 16px;
@@ -38,14 +56,19 @@ body {
   box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
-/* ===== HERO ===== */
+/* =========================
+   HERO
+========================= */
 .hero {
   text-align: center;
 }
 
-/* ===== SIDEBAR ===== */
+/* =========================
+   SIDEBAR
+========================= */
 .sidebar {
   position: relative;
+  max-width: 100%;
 }
 
 .nav-link {
@@ -56,7 +79,9 @@ body {
   background: #f2f2f7;
 }
 
-/* ===== MOBILE MENU ===== */
+/* =========================
+   MOBILE MENU
+========================= */
 .menu-row {
   display: flex;
   align-items: center;
@@ -85,7 +110,9 @@ body {
   .sidebar.open .sidebar-links { display: block; }
 }
 
-/* ===== CALENDAR ===== */
+/* =========================
+   CALENDAR
+========================= */
 .calendar-header {
   display: flex;
   justify-content: space-between;
@@ -121,6 +148,7 @@ body {
   padding: 8px;
   min-height: 110px;
   font-size: 13px;
+  min-width: 0;
 }
 
 .day span {
@@ -138,7 +166,31 @@ body {
   margin-top: 6px;
 }
 
-/* ===== FOOTER ===== */
+/* =========================
+   INSTAGRAM SECTION (ADDED)
+========================= */
+.instagram-card h2 {
+  margin-bottom: 10px;
+}
+
+.instagram-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.instagram-embed {
+  background: #f2f2f7;
+  border-radius: 14px;
+  padding: 20px;
+  min-height: 220px;
+  text-align: center;
+  color: #666;
+}
+
+/* =========================
+   FOOTER
+========================= */
 .footer {
   text-align: center;
   font-size: 12px;
@@ -146,13 +198,59 @@ body {
   margin: 20px 0;
 }
 
-/* ===== IMAGE ===== */
+/* =========================
+   IMAGE
+========================= */
 .full-image {
   width: 100%;
   max-width: 1200px;
   display: block;
   margin: 30px auto 0 auto;
 }
+
+/* =========================
+   MOBILE CALENDAR FIX
+========================= */
+@media (max-width: 900px) {
+
+  .day {
+    min-height: 80px;
+    font-size: 11px;
+    padding: 4px;
+  }
+
+  .event {
+    font-size: 10px;
+    padding: 4px;
+  }
+
+  .weekdays {
+    font-size: 11px;
+  }
+
+  .calendar-grid {
+    gap: 6px;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .day {
+    min-height: 65px;
+    font-size: 10px;
+    padding: 3px;
+  }
+
+  .event {
+    font-size: 9px;
+    padding: 3px;
+  }
+
+  .weekdays {
+    font-size: 10px;
+  }
+}
+
 </style>
 </head>
 
@@ -189,6 +287,7 @@ body {
     <!-- MAIN -->
     <main>
 
+      <!-- CALENDAR -->
       <div class="card">
 
         <div class="calendar-header">
@@ -206,6 +305,19 @@ body {
 
       </div>
 
+      <!-- INSTAGRAM (ADDED BACK) -->
+      <div class="card instagram-card">
+        <h2>From Instagram</h2>
+
+        <div class="instagram-grid">
+
+          <div class="instagram-embed">Instagram Embed 1</div>
+          <div class="instagram-embed">Instagram Embed 2</div>
+          <div class="instagram-embed">Instagram Embed 3</div>
+
+        </div>
+      </div>
+
     </main>
   </div>
 </div>
@@ -220,60 +332,41 @@ body {
 
 <script>
 
-/* =========================
-   MENU
-========================= */
+/* MENU */
 function toggleMenu() {
   document.getElementById("sidebar").classList.toggle("open");
 }
 
-/* =========================
-   1. MULTI-DATE EVENTS
-   (same event on multiple chosen dates)
-========================= */
+/* EVENTS */
 const multiDateEvents = [
   {
     name: "Theology on Tap<br>6:30 PM – Green Bay Distillery",
-    dates: [
-      "2026-04-14",
-      "2026-04-21",
-      "2026-04-28"
-    ]
+    dates: ["2026-04-14","2026-04-21","2026-04-28"]
   },
-    {
-    name: "Courpus Christi<br>6:30 PM – OLOL",
-    dates: [
-      "2026-04-5",
-      "2026-04-23",
-      "2026-04-25"
-    ]
+  {
+    name: "Corpus Christi<br>6:30 PM – OLOL",
+    dates: ["2026-04-05","2026-04-23","2026-04-25"]
   }
 ];
 
-/* =========================
-   2. RECURRING EVENTS
-   - weekly or limited
-========================= */
 const recurringEvents = [
   {
-    name: "Bible Study<br>7:00 PM – St.Peter & Paul",
+    name: "Bible Study<br>7:00 PM – St. Peter & Paul",
     dayOfWeek: 4,
     startDate: "2026-04-01",
-    occurrences: null, // null = infinite
+    occurrences: null,
     excludeDates: []
   },
   {
     name: "Sunday Fellowship<br>After Mass",
     dayOfWeek: 0,
     startDate: "2026-04-01",
-    occurrences: null, // # is # of repeating
+    occurrences: null,
     excludeDates: []
   }
 ];
 
-/* =========================
-   CALENDAR
-========================= */
+/* CALENDAR */
 let currentDate = new Date();
 
 const months = [
@@ -281,9 +374,6 @@ const months = [
   "July","August","September","October","November","December"
 ];
 
-/* =========================
-   RENDER
-========================= */
 function renderCalendar() {
 
   const year = currentDate.getFullYear();
@@ -299,17 +389,15 @@ function renderCalendar() {
   const daysInMonth = new Date(year, month + 1, 0).getDate();
 
   for (let i = 0; i < firstDay; i++) {
-    const empty = document.createElement("div");
-    empty.className = "day";
-    calendar.appendChild(empty);
+    calendar.appendChild(document.createElement("div"));
   }
 
   for (let d = 1; d <= daysInMonth; d++) {
 
     const dateStr =
       year + "-" +
-      String(month + 1).padStart(2, '0') + "-" +
-      String(d).padStart(2, '0');
+      String(month + 1).padStart(2,'0') + "-" +
+      String(d).padStart(2,'0');
 
     const dateObj = new Date(dateStr);
     const weekday = dateObj.getDay();
@@ -319,52 +407,15 @@ function renderCalendar() {
 
     let html = `<span>${d}</span>`;
 
-    /* =========================
-       A) MULTI-DATE EVENTS
-    ========================= */
     multiDateEvents.forEach(ev => {
       if (ev.dates.includes(dateStr)) {
         html += `<div class="event">${ev.name}</div>`;
       }
     });
 
-    /* =========================
-       B) RECURRING EVENTS
-    ========================= */
     recurringEvents.forEach(ev => {
-
       const start = new Date(ev.startDate);
-      const afterStart = dateObj >= start;
-      const isMatch = weekday === ev.dayOfWeek;
-      const excluded = ev.excludeDates.includes(dateStr);
-
-      if (!afterStart || !isMatch || excluded) return;
-
-      // limited occurrences
-      if (ev.occurrences !== null) {
-
-        let count = 0;
-        let temp = new Date(ev.startDate);
-
-        while (temp <= dateObj) {
-
-          if (
-            temp.getDay() === ev.dayOfWeek &&
-            !ev.excludeDates.includes(temp.toISOString().split("T")[0]) &&
-            temp >= start
-          ) {
-            count++;
-          }
-
-          temp.setDate(temp.getDate() + 1);
-        }
-
-        if (count <= ev.occurrences) {
-          html += `<div class="event">${ev.name}</div>`;
-        }
-
-      } else {
-        // infinite repeat
+      if (dateObj >= start && weekday === ev.dayOfWeek) {
         html += `<div class="event">${ev.name}</div>`;
       }
     });
@@ -374,9 +425,6 @@ function renderCalendar() {
   }
 }
 
-/* =========================
-   MONTH NAV
-========================= */
 function changeMonth(dir) {
   currentDate.setMonth(currentDate.getMonth() + dir);
   renderCalendar();
