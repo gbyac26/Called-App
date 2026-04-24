@@ -8,7 +8,7 @@
 <style>
 
 /* =========================
-   GLOBAL SAFETY FIX
+   GLOBAL
 ========================= */
 * {
   box-sizing: border-box;
@@ -16,15 +16,15 @@
 
 html, body {
   margin: 0;
+  padding: 0;
   overflow-x: hidden;
-  width: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
   background: #ffe888;
   color: #1c1c1e;
 }
 
 /* =========================
-   LAYOUT
+   CONTAINER
 ========================= */
 .container {
   max-width: 1200px;
@@ -32,6 +32,9 @@ html, body {
   padding: 16px;
 }
 
+/* =========================
+   LAYOUT
+========================= */
 .layout {
   display: grid;
   grid-template-columns: 260px 1fr;
@@ -41,7 +44,6 @@ html, body {
 @media (max-width: 900px) {
   .layout {
     grid-template-columns: 1fr;
-    width: 100%;
   }
 }
 
@@ -68,7 +70,6 @@ html, body {
 ========================= */
 .sidebar {
   position: relative;
-  max-width: 100%;
 }
 
 .nav-link {
@@ -77,13 +78,9 @@ html, body {
   margin-bottom: 10px;
   border-radius: 10px;
   background: #f2f2f7;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
 }
 
-/* =========================
-   MOBILE MENU
-========================= */
+/* mobile menu */
 .menu-row {
   display: flex;
   align-items: center;
@@ -102,7 +99,7 @@ html, body {
 
 .menu-text {
   font-size: 14px;
-  color: #6b6b6b;
+  color: #666;
   cursor: pointer;
 }
 
@@ -113,7 +110,7 @@ html, body {
 }
 
 /* =========================
-   CALENDAR (DESKTOP)
+   CALENDAR
 ========================= */
 .calendar-header {
   display: flex;
@@ -123,10 +120,9 @@ html, body {
 
 .arrow {
   cursor: pointer;
-  font-size: 22px;
   padding: 6px 12px;
-  border-radius: 8px;
   background: #f2f2f7;
+  border-radius: 8px;
 }
 
 .weekdays {
@@ -135,7 +131,7 @@ html, body {
   text-align: center;
   font-weight: 600;
   margin: 10px 0;
-  color: #6b6b6b;
+  color: #666;
 }
 
 .calendar-grid {
@@ -150,8 +146,6 @@ html, body {
   padding: 8px;
   min-height: 110px;
   font-size: 13px;
-  min-width: 0;
-  overflow-wrap: break-word;
 }
 
 .day span {
@@ -170,78 +164,48 @@ html, body {
 }
 
 /* =========================
+   INSTAGRAM
+========================= */
+.instagram-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.instagram-placeholder {
+  background: #f2f2f7;
+  border-radius: 14px;
+  padding: 40px 20px;
+  text-align: center;
+  color: #666;
+}
+
+/* =========================
+   IMAGE FIX (IMPORTANT)
+========================= */
+.full-image {
+  width: 100%;
+  max-width: 1200px;
+  max-height: 55vh;
+  object-fit: contain;
+  display: block;
+  margin: 30px auto 0 auto;
+}
+
+@media (max-width: 900px) {
+  .full-image {
+    max-height: 40vh;
+  }
+}
+
+/* =========================
    FOOTER
 ========================= */
 .footer {
   text-align: center;
   font-size: 12px;
-  color: #6b6b6b;
+  color: #666;
   margin: 20px 0;
-}
-
-/* =========================
-   IMAGE
-========================= */
-.full-image {
-  width: 100%;
-  max-width: 1200px;
-  display: block;
-  margin: 30px auto 0 auto;
-}
-
-/* =========================
-   📱 MOBILE CALENDAR FIX
-   (THIS IS THE IMPORTANT PART)
-========================= */
-@media (max-width: 900px) {
-
-  .calendar-grid {
-    gap: 6px;
-  }
-
-  .day {
-    padding: 4px;
-    min-height: 80px;
-    font-size: 11px;
-  }
-
-  .event {
-    font-size: 10px;
-    padding: 4px;
-    border-radius: 6px;
-  }
-
-  .weekdays {
-    font-size: 11px;
-  }
-
-  .arrow {
-    font-size: 18px;
-    padding: 4px 8px;
-  }
-
-  .calendar-header h2 {
-    font-size: 16px;
-  }
-}
-
-/* extra small phones */
-@media (max-width: 600px) {
-
-  .day {
-    min-height: 65px;
-    font-size: 10px;
-    padding: 3px;
-  }
-
-  .event {
-    font-size: 9px;
-    padding: 3px;
-  }
-
-  .weekdays {
-    font-size: 10px;
-  }
 }
 
 </style>
@@ -280,6 +244,7 @@ html, body {
     <!-- MAIN -->
     <main>
 
+      <!-- CALENDAR -->
       <div class="card">
 
         <div class="calendar-header">
@@ -297,6 +262,16 @@ html, body {
 
       </div>
 
+      <!-- INSTAGRAM -->
+      <div class="card">
+        <h2>From Instagram</h2>
+        <div class="instagram-grid">
+          <div class="instagram-placeholder">Embed Post 1</div>
+          <div class="instagram-placeholder">Embed Post 2</div>
+          <div class="instagram-placeholder">Embed Post 3</div>
+        </div>
+      </div>
+
     </main>
   </div>
 </div>
@@ -311,60 +286,37 @@ html, body {
 
 <script>
 
-/* =========================
-   MENU
-========================= */
+/* MENU */
 function toggleMenu() {
   document.getElementById("sidebar").classList.toggle("open");
 }
 
-/* =========================
-   1. MULTI-DATE EVENTS
-   (same event on multiple chosen dates)
-========================= */
+/* EVENTS */
 const multiDateEvents = [
   {
-    name: "Theology on Tap<br>6:30 PM – Green Bay Distillery",
-    dates: [
-      "2026-04-14",
-      "2026-04-21",
-      "2026-04-28"
-    ]
-  },
-    {
-    name: "Courpus Christi<br>6:30 PM – OLOL",
-    dates: [
-      "2026-04-5",
-      "2026-04-23",
-      "2026-04-25"
-    ]
+    name: "Young Adult Mass<br>6:30 PM – St. Mary’s Church",
+    dates: ["2026-04-14","2026-04-21","2026-04-28"]
   }
 ];
 
-/* =========================
-   2. RECURRING EVENTS
-   - weekly or limited
-========================= */
 const recurringEvents = [
   {
-    name: "Bible Study<br>7:00 PM – St.Peter & Paul",
+    name: "Bible Study<br>7:00 PM – Parish Hall",
     dayOfWeek: 4,
     startDate: "2026-04-01",
-    occurrences: null, // null = infinite
+    occurrences: 6,
     excludeDates: []
   },
   {
     name: "Sunday Fellowship<br>After Mass",
     dayOfWeek: 0,
     startDate: "2026-04-01",
-    occurrences: null, // # is # of repeating
+    occurrences: null,
     excludeDates: []
   }
 ];
 
-/* =========================
-   CALENDAR
-========================= */
+/* CALENDAR */
 let currentDate = new Date();
 
 const months = [
@@ -372,9 +324,6 @@ const months = [
   "July","August","September","October","November","December"
 ];
 
-/* =========================
-   RENDER
-========================= */
 function renderCalendar() {
 
   const year = currentDate.getFullYear();
@@ -390,25 +339,20 @@ function renderCalendar() {
   const daysInMonth = new Date(year, month + 1, 0).getDate();
 
   for (let i = 0; i < firstDay; i++) {
-    const empty = document.createElement("div");
-    empty.className = "day";
-    calendar.appendChild(empty);
+    calendar.innerHTML += `<div class="day"></div>`;
   }
 
   for (let d = 1; d <= daysInMonth; d++) {
 
     const dateStr =
       year + "-" +
-      String(month + 1).padStart(2, '0') + "-" +
-      String(d).padStart(2, '0');
+      String(month + 1).padStart(2,'0') + "-" +
+      String(d).padStart(2,'0');
 
     const dateObj = new Date(dateStr);
     const weekday = dateObj.getDay();
 
-    const day = document.createElement("div");
-    day.className = "day";
-
-    let html = `<span>${d}</span>`;
+    let html = `<div class="day"><span>${d}</span>`;
 
     /* multi-date */
     multiDateEvents.forEach(ev => {
@@ -419,49 +363,19 @@ function renderCalendar() {
 
     /* recurring */
     recurringEvents.forEach(ev => {
-
       const start = new Date(ev.startDate);
-      const afterStart = dateObj >= start;
-      const isMatch = weekday === ev.dayOfWeek;
-      const excluded = ev.excludeDates.includes(dateStr);
+      const match = weekday === ev.dayOfWeek;
 
-      if (!afterStart || !isMatch || excluded) return;
-
-      if (ev.occurrences !== null) {
-
-        let count = 0;
-        let temp = new Date(ev.startDate);
-
-        while (temp <= dateObj) {
-
-          if (
-            temp.getDay() === ev.dayOfWeek &&
-            !ev.excludeDates.includes(temp.toISOString().split("T")[0]) &&
-            temp >= start
-          ) {
-            count++;
-          }
-
-          temp.setDate(temp.getDate() + 1);
-        }
-
-        if (count <= ev.occurrences) {
-          html += `<div class="event">${ev.name}</div>`;
-        }
-
-      } else {
+      if (dateObj >= start && match) {
         html += `<div class="event">${ev.name}</div>`;
       }
     });
 
-    day.innerHTML = html;
-    calendar.appendChild(day);
+    html += `</div>`;
+    calendar.innerHTML += html;
   }
 }
 
-/* =========================
-   NAV
-========================= */
 function changeMonth(dir) {
   currentDate.setMonth(currentDate.getMonth() + dir);
   renderCalendar();
