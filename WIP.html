@@ -37,7 +37,9 @@ body {
   box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
-.hero { text-align: center; }
+.hero {
+  text-align: center;
+}
 
 .nav-link {
   display: block;
@@ -47,7 +49,17 @@ body {
   background: #f2f2f7;
 }
 
-/* ===== CALENDAR ===== */
+/* FEATURE IMAGE */
+.feature-image {
+  width: 100%;
+  max-width: 900px;
+  border-radius: 16px;
+  display: block;
+  margin: 0 auto;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* CALENDAR */
 .calendar-header {
   display: flex;
   justify-content: space-between;
@@ -135,13 +147,32 @@ body {
     <p>Connecting Catholics ages 18–30(ish)</p>
   </div>
 
+  <!-- FEATURE IMAGE -->
+  <div class="card">
+    <img
+      src="images/Screenshot_20260420_1330221_Instagram.jpg"
+      alt="GBYAC Highlight"
+      class="feature-image"
+    >
+    <p style="text-align:center; margin-top:10px; font-size:14px; color:#666;">
+      Recent highlight from our community
+    </p>
+  </div>
+
   <div class="layout">
 
     <!-- SIDEBAR -->
     <aside class="card">
       <a class="nav-link" href="#">Submit an Event</a>
-      <a class="nav-link" href="#">Join Our Group</a>
-      <a class="nav-link" href="#">Resources Library</a>
+
+      <a class="nav-link" href="https://gbyac.com/Called.html">
+        Join Our Group
+      </a>
+
+      <a class="nav-link" href="https://gbyac.com/books">
+        Catholic Library
+      </a>
+
       <a class="nav-link" href="#">Contact</a>
     </aside>
 
@@ -183,7 +214,6 @@ body {
         <h2>From Instagram</h2>
         <div class="instagram-grid">
 
-          <!-- REPLACE WITH YOUR EMBED LINKS -->
           <div class="instagram-placeholder">
             Paste Instagram embed code here
           </div>
@@ -209,14 +239,14 @@ body {
 </div>
 
 <script>
-// ===== EVENTS =====
+// EVENTS
 const events = {
   "2026-04-14": [
     "Young Adult Mass<br>6:30 PM – St. Mary’s Church"
   ]
 };
 
-// ===== DATE STATE =====
+// DATE STATE
 let currentDate = new Date();
 
 const months = [
@@ -224,9 +254,7 @@ const months = [
   "July","August","September","October","November","December"
 ];
 
-// ===== RENDER FUNCTION =====
 function renderCalendar() {
-
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
 
@@ -246,7 +274,6 @@ function renderCalendar() {
   }
 
   for (let d = 1; d <= daysInMonth; d++) {
-
     const dateStr =
       year + "-" +
       String(month + 1).padStart(2, '0') + "-" +
@@ -268,7 +295,6 @@ function renderCalendar() {
   }
 }
 
-// ===== MONTH NAV =====
 function changeMonth(direction) {
   currentDate.setMonth(currentDate.getMonth() + direction);
   renderCalendar();
