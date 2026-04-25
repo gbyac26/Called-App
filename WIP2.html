@@ -165,7 +165,7 @@ html, body {
 }
 
 /* =========================
-   INSTAGRAM
+   INSTAGRAM (FIX ONLY HERE)
 ========================= */
 .instagram-grid {
   display: grid;
@@ -201,49 +201,6 @@ html, body {
   margin: 20px 0;
 }
 
-/* =========================
-   MOBILE FIXES
-========================= */
-@media (max-width: 900px) {
-
-  .day {
-    min-height: 80px;
-    font-size: 11px;
-    padding: 4px;
-  }
-
-  .event {
-    font-size: 10px;
-    padding: 4px;
-  }
-
-  .weekdays {
-    font-size: 11px;
-  }
-
-  .calendar-grid {
-    gap: 6px;
-  }
-}
-
-@media (max-width: 600px) {
-
-  .day {
-    min-height: 65px;
-    font-size: 10px;
-    padding: 3px;
-  }
-
-  .event {
-    font-size: 9px;
-    padding: 3px;
-  }
-
-  .weekdays {
-    font-size: 10px;
-  }
-}
-
 </style>
 </head>
 
@@ -251,7 +208,7 @@ html, body {
 
 <div class="container">
 
-  <!-- TITLE -->
+  <!-- TITLE BLOCK -->
   <div class="card hero">
     <h1>Green Bay Young Adult Catholic</h1>
     <p>Sharing events for Catholics 18–30(ish)</p>
@@ -302,34 +259,34 @@ html, body {
       <div class="card">
         <h2>From Instagram</h2>
 
-        <div class="instagram-grid">
+<div class="instagram-grid">
 
-          <blockquote class="instagram-media"
-            data-instgrm-permalink="https://www.instagram.com/p/DTirPFWEZcL/"
-            data-instgrm-version="14"></blockquote>
+  <blockquote class="instagram-media"
+    data-instgrm-permalink="https://www.instagram.com/p/DTirPFWEZcL/"
+    data-instgrm-version="14"></blockquote>
 
-          <blockquote class="instagram-media"
-            data-instgrm-permalink="https://www.instagram.com/p/DJ-mvVqx13X/"
-            data-instgrm-version="14"></blockquote>
+  <blockquote class="instagram-media"
+    data-instgrm-permalink="https://www.instagram.com/p/DJ-mvVqx13X/"
+    data-instgrm-version="14"></blockquote>
 
-          <blockquote class="instagram-media"
-            data-instgrm-permalink="https://www.instagram.com/p/DXewaGAEXFI/"
-            data-instgrm-version="14"></blockquote>
+  <blockquote class="instagram-media"
+    data-instgrm-permalink="https://www.instagram.com/p/DXewaGAEXFI/"
+    data-instgrm-version="14"></blockquote>
 
-        </div>
+</div>
 
-        <!-- ✅ FIXED INSTAGRAM LOADING -->
-        <script async src="https://www.instagram.com/embed.js"></script>
+<!-- ✅ ONLY FIXED PART -->
+<script async src="https://www.instagram.com/embed.js"></script>
 
-        <script>
-          window.addEventListener("load", function () {
-            setTimeout(function () {
-              if (window.instgrm) {
-                window.instgrm.Embeds.process();
-              }
-            }, 600);
-          });
-        </script>
+<script>
+  window.addEventListener("load", function () {
+    setTimeout(function () {
+      if (window.instgrm) {
+        window.instgrm.Embeds.process();
+      }
+    }, 700);
+  });
+</script>
 
       </div>
 
