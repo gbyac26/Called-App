@@ -91,7 +91,7 @@ mark {
   </div>
 
   <div class="search-wrapper">
-    <input id="searchInput" placeholder="Search books..." oninput="filterBooks()">
+    <input id="searchInput" placeholder="Search books...">
     <button id="clearBtn" onclick="clearSearch()">×</button>
   </div>
 
@@ -9536,46 +9536,64 @@ mark {
 </div>
 
 <script>
+const input = document.getElementById("searchInput");
+const clearBtn = document.getElementById("clearBtn");
+const books = document.querySelectorAll(".book");
+const bookCount = document.getElementById("bookCount");
+
+let timeout;
+
+// run search with small delay (fixes freezing)
+input.addEventListener("input", () => {
+  clearTimeout(timeout);
+  timeout = setTimeout(filterBooks, 250);
+});
+
 function filterBooks() {
-  const q = searchInput.value.toLowerCase();
+  const q = input.value.toLowerCase();
   clearBtn.style.display = q ? "block" : "none";
 
-  document.querySelectorAll(".book").forEach(b => {
-    const t = b.querySelector(".title");
-    const text = t.textContent;
-    t.innerHTML = text;
+  let count = 0;
 
-    if (text.toLowerCase().includes(q)) {
-      b.style.display = "";
-      if (q) {
-        t.innerHTML = text.replace(
-          new RegExp("(" + q.replace(/[.*+?^${}()|[\]\\]/g,"\\$&") + ")", "ig"),
-          "<mark>$1</mark>"
-        );
+  books.forEach(b => {
+    const title = b.querySelector(".title");
+    const text = title.textContent;
+
+    title.innerHTML = text; // reset
+
+    if (!q || text.toLowerCase().includes(q)) {
+      if (count < 100) { // limit results
+        b.style.display = "";
+        count++;
+
+        if (q) {
+          const safeQ = q.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+          title.innerHTML = text.replace(
+            new RegExp("(" + safeQ + ")", "i"),
+            "<mark>$1</mark>"
+          );
+        }
+
+      } else {
+        b.style.display = "none";
       }
     } else {
       b.style.display = "none";
     }
   });
+
+  bookCount.textContent = "Books: " + count;
 }
 
 function clearSearch() {
-  searchInput.value = "";
-  clearBtn.style.display = "none";
+  input.value = "";
   filterBooks();
 }
 
-<!-- NEW Code Block For Counter -->
-
-
-/* ✅ BOOK COUNTER (RUNS AFTER PAGE LOADS) */
-window.onload = function () {
-  const books = document.getElementsByClassName("book").length;
-  document.getElementById("bookCount").textContent =
-    "Books: " + books;
+// initial count
+window.onload = () => {
+  bookCount.textContent = "Books: " + books.length;
 };
-
-  
 </script>
 
 </body>
