@@ -493,9 +493,14 @@ function changeMonth(dir) {
 
 renderCalendar();
 
-</script>
-
 <script async src="https://www.instagram.com/embed.js"></script>
+<script>
+  window.addEventListener("load", () => {
+    if (window.instgrm) {
+      window.instgrm.Embeds.process();
+    }
+  });
+</script>
    
 </body>
 </html>
