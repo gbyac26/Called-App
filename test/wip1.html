@@ -165,7 +165,7 @@ html, body {
 }
 
 /* =========================
-   INSTAGRAM (PC) / STATIC IMAGES (MOBILE)
+   INSTAGRAM (PC) / HIGH-RES CLICKABLE IMAGES (MOBILE)
 ========================= */
 .instagram-grid {
   display: grid;
@@ -224,16 +224,21 @@ html, body {
   border-radius: 12px !important;
 }
 
-/* Mobile Static Images */
+/* Mobile Static Images - HIGH RES + RESPONSIVE */
 .instagram-static {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   border-radius: 12px;
   position: absolute;
   top: 0;
   left: 0;
   display: none;
+  
+  /* High-res support */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 
 @media (max-width: 900px) {
@@ -391,37 +396,44 @@ html, body {
         <div id="calendar" class="calendar-grid"></div>
       </div>
 
-      <!-- INSTAGRAM (PC) / STATIC IMAGES (MOBILE) -->
+      <!-- INSTAGRAM (PC) / HIGH-RES CLICKABLE IMAGES (MOBILE) -->
       <div class="card">
         <h2>From Instagram</h2>
 
         <div class="instagram-grid">
 
-          <!-- Post 1: PC=Insta1, Mobile=../images/insta1.jpg -->
-          <div class="instagram-embed instagram-embed-desktop" data-mobile-image="../images/insta1.jpg">
-            <img src="../images/insta1.jpg" alt="Instagram Post 1" class="instagram-static">
-            <blockquote class="instagram-media"
-              data-instgrm-permalink="https://www.instagram.com/p/DTirPFWEZcL/"
-              data-instgrm-version="14"
-              data-instgrm-captioned></blockquote>
-          </div>
+          <!-- Post 1: PC=Live Insta, Mobile=../images/insta1.jpg → Opens Instagram -->
+          <a href="https://www.instagram.com/p/DTirPFWEZcL/" target="_blank" class="instagram-link">
+            <div class="instagram-embed instagram-embed-desktop" data-mobile-image="../images/insta1.jpg">
+              <img src="../images/insta1.jpg" alt="Instagram Post 1" class="instagram-static">
+              <blockquote class="instagram-media"
+                data-instgrm-permalink="https://www.instagram.com/p/DTirPFWEZcL/"
+                data-instgrm-version="14"
+                data-instgrm-captioned></blockquote>
+            </div>
+          </a>
 
-          <!-- Post 2: PC=Insta2, Mobile=../images/insta2.jpg -->
-          <div class="instagram-embed instagram-embed-desktop" data-mobile-image="../images/insta2.jpg">
-            <img src="../images/insta2.jpg" alt="Instagram Post 2" class="instagram-static">
-            <blockquote class="instagram-media"
-              data-instgrm-permalink="https://www.instagram.com/p/DJ-mvVqx13X/"
-              data-instgrm-version="14"
-              data-instgrm-captioned></blockquote>
-          </div>
+          <!-- Post 2: PC=Live Insta, Mobile=../images/insta2.jpg → Opens Instagram -->
+          <a href="https://www.instagram.com/p/DJ-mvVqx13X/" target="_blank" class="instagram-link">
+            <div class="instagram-embed instagram-embed-desktop" data-mobile-image="../images/insta2.jpg">
+              <img src="../images/insta2.jpg" alt="Instagram Post 2" class="instagram-static">
+              <blockquote class="instagram-media"
+                data-instgrm-permalink="https://www.instagram.com/p/DJ-mvVqx13X/"
+                data-instgrm-version="14"
+                data-instgrm-captioned></blockquote>
+            </div>
+          </a>
 
-          <!-- Post 3: PC=Insta3, Mobile=empty (no image) -->
-          <div class="instagram-embed instagram-embed-desktop">
-            <blockquote class="instagram-media"
-              data-instgrm-permalink="https://www.instagram.com/p/DXewaGAEXFI/"
-              data-instgrm-version="14"
-              data-instgrm-captioned></blockquote>
-          </div>
+          <!-- Post 3: PC=Live Insta, Mobile=../images/insta3.jpg → Opens Instagram -->
+          <a href="https://www.instagram.com/p/DXewaGAEXFI/" target="_blank" class="instagram-link">
+            <div class="instagram-embed instagram-embed-desktop" data-mobile-image="../images/insta3.jpg">
+              <img src="../images/insta3.jpg" alt="Instagram Post 3" class="instagram-static">
+              <blockquote class="instagram-media"
+                data-instgrm-permalink="https://www.instagram.com/p/DXewaGAEXFI/"
+                data-instgrm-version="14"
+                data-instgrm-captioned></blockquote>
+            </div>
+          </a>
 
         </div>
       </div>
@@ -435,9 +447,13 @@ html, body {
 </div>
 
 <script>
-/* ===== SMART INSTAGRAM: PC=Live Embeds, Mobile=Static Images from ../images/ ===== */
+/* ===== SMART INSTAGRAM: PC=Live Embeds, Mobile=High-Res Clickable Images ===== */
 function initInstagram() {
   const isDesktop = window.innerWidth > 900;
+  
+  document.querySelectorAll('.instagram-link').forEach(link => {
+    link.style.pointerEvents = 'auto';
+  });
   
   if (isDesktop) {
     // PC: Load Instagram embeds
@@ -461,12 +477,23 @@ function initInstagram() {
     
     document.head.appendChild(igScript);
   } else {
-    // Mobile: Load static images immediately from ../images/
+    // Mobile: Load ALL 3 high-res images + make clickable
     document.querySelectorAll('.instagram-static').forEach(img => {
       const parent = img.closest('.instagram-embed');
+      const link = parent.closest('.instagram-link');
+      
       img.onload = () => {
         parent.classList.add('static-image', 'loaded');
       };
+      
+      // Make entire container clickable to Instagram
+      if (link) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.open(link.href, '_blank');
+        });
+      }
+      
       // Fallback if image already cached
       if (img.complete) {
         parent.classList.add('static-image', 'loaded');
