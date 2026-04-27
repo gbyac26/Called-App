@@ -397,25 +397,25 @@ html, body {
 
         <div class="instagram-grid">
 
-          <!-- Post 1: PC=Insta1, Mobile=insta1.jpg -->
-          <div class="instagram-embed instagram-embed-desktop" data-mobile-image="insta1.jpg">
-            <img src="insta1.jpg" alt="Instagram Post 1" class="instagram-static">
+          <!-- Post 1: PC=Insta1, Mobile=../images/insta1.jpg -->
+          <div class="instagram-embed instagram-embed-desktop" data-mobile-image="../images/insta1.jpg">
+            <img src="../images/insta1.jpg" alt="Instagram Post 1" class="instagram-static">
             <blockquote class="instagram-media"
               data-instgrm-permalink="https://www.instagram.com/p/DTirPFWEZcL/"
               data-instgrm-version="14"
               data-instgrm-captioned></blockquote>
           </div>
 
-          <!-- Post 2: PC=Insta2, Mobile=insta2.jpg -->
-          <div class="instagram-embed instagram-embed-desktop" data-mobile-image="insta2.jpg">
-            <img src="insta2.jpg" alt="Instagram Post 2" class="instagram-static">
+          <!-- Post 2: PC=Insta2, Mobile=../images/insta2.jpg -->
+          <div class="instagram-embed instagram-embed-desktop" data-mobile-image="../images/insta2.jpg">
+            <img src="../images/insta2.jpg" alt="Instagram Post 2" class="instagram-static">
             <blockquote class="instagram-media"
               data-instgrm-permalink="https://www.instagram.com/p/DJ-mvVqx13X/"
               data-instgrm-version="14"
               data-instgrm-captioned></blockquote>
           </div>
 
-          <!-- Post 3: PC=Insta3, Mobile=show nothing / empty -->
+          <!-- Post 3: PC=Insta3, Mobile=empty (no image) -->
           <div class="instagram-embed instagram-embed-desktop">
             <blockquote class="instagram-media"
               data-instgrm-permalink="https://www.instagram.com/p/DXewaGAEXFI/"
@@ -435,7 +435,7 @@ html, body {
 </div>
 
 <script>
-/* ===== SMART INSTAGRAM: PC=Live Embeds, Mobile=Static Images ===== */
+/* ===== SMART INSTAGRAM: PC=Live Embeds, Mobile=Static Images from ../images/ ===== */
 function initInstagram() {
   const isDesktop = window.innerWidth > 900;
   
@@ -461,7 +461,7 @@ function initInstagram() {
     
     document.head.appendChild(igScript);
   } else {
-    // Mobile: Load static images immediately
+    // Mobile: Load static images immediately from ../images/
     document.querySelectorAll('.instagram-static').forEach(img => {
       const parent = img.closest('.instagram-embed');
       img.onload = () => {
