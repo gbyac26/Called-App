@@ -174,12 +174,10 @@ html, body {
 }
 
 .instagram-embed {
-  background: #f2f2f7;
   border-radius: 14px;
-  padding: 20px;
-  min-height: 220px;
-  text-align: center;
-  color: #666;
+  overflow: hidden;
+  padding: 0;
+  background: transparent;
 }
 
 
@@ -313,11 +311,30 @@ html, body {
       <div class="card">
         <h2>From Instagram</h2>
 
-        <div class="instagram-grid">
-          <div class="instagram-embed">Embed 1</div>
-          <div class="instagram-embed">Embed 2</div>
-          <div class="instagram-embed">Embed 3</div>
-        </div>
+<div class="instagram-grid">
+
+  <div class="instagram-embed">
+    <blockquote class="instagram-media"
+      data-instgrm-permalink="https://www.instagram.com/p/REPLACE_1/"
+      data-instgrm-version="14">
+    </blockquote>
+  </div>
+
+  <div class="instagram-embed">
+    <blockquote class="instagram-media"
+      data-instgrm-permalink="https://www.instagram.com/p/REPLACE_2/"
+      data-instgrm-version="14">
+    </blockquote>
+  </div>
+
+  <div class="instagram-embed">
+    <blockquote class="instagram-media"
+      data-instgrm-permalink="https://www.instagram.com/p/REPLACE_3/"
+      data-instgrm-version="14">
+    </blockquote>
+  </div>
+
+</div>
       </div>
 
     </main>
@@ -369,7 +386,7 @@ const recurringEvents = [
     startDate: "2026-04-07",
     occurrences: 6,
     excludeDates: []
-  }
+  },
   {
     name: "Summa Saturdays<br>9:00 AM – Cathedral Book and Girft",
     dayOfWeek: 4,
@@ -478,5 +495,7 @@ renderCalendar();
 
 </script>
 
+<script async src="https://www.instagram.com/embed.js"></script>
+   
 </body>
 </html>
