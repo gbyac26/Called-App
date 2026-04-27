@@ -371,7 +371,15 @@ html, body {
   Powered by Jesus Christ
 </div>
 
+<!-- INSTAGRAM FIX SCRIPT -->
+<script async src="https://www.instagram.com/embed.js"></script>
+
 <script>
+window.addEventListener("load", function () {
+  if (window.instgrm && window.instgrm.Embeds) {
+    window.instgrm.Embeds.process();
+  }
+});
 
 /* =========================
    MENU
@@ -519,8 +527,6 @@ if (window.instgrm) {
 }
 
 </script>
-
-<script async src="https://www.instagram.com/embed.js"></script>
    
 </body>
 </html>
