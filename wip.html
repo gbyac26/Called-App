@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Green Bay Young Adult Catholic</title>
 
 <style>
@@ -21,7 +21,6 @@ html, body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
   background: #ffe888;
   color: #1c1c1e;
-  -webkit-text-size-adjust: 100%;
 }
 
 /* =========================
@@ -99,7 +98,6 @@ html, body {
   background: #f2f2f7;
   border-radius: 10px;
   border: none;
-  font-family: inherit;
 }
 
 .menu-text {
@@ -130,7 +128,6 @@ html, body {
   border-radius: 8px;
   background: #f2f2f7;
   border: none;
-  font-family: inherit;
 }
 
 .weekdays {
@@ -169,107 +166,60 @@ html, body {
   border-radius: 8px;
   font-size: 12px;
   margin-top: 6px;
-  line-height: 1.2;
 }
 
 /* =========================
-   INSTAGRAM EMBEDS - MOBILE PERFECTED ✅
+   ORIGINAL INSTAGRAM GRID (FIXED FOR MOBILE)
 ========================= */
 .instagram-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
-  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .instagram-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .instagram-embed {
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
   width: 100%;
-  height: 0;
-  padding-bottom: 100%; /* 1:1 aspect ratio */
   overflow: hidden;
   border-radius: 12px;
   background: #f2f2f7;
+  min-height: 300px;
 }
 
-.instagram-embed iframe,
-.instagram-embed blockquote {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  border: 0 !important;
-  border-radius: 12px !important;
-  max-width: none !important;
-  min-width: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* Instagram specific overrides */
 .instagram-media {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
   width: 100% !important;
+  max-width: 100% !important;
   height: 100% !important;
+  min-height: 300px !important;
   margin: 0 !important;
-  padding: 0 !important;
+  border-radius: 12px !important;
 }
 
-/* Fallback for when Instagram loads */
+/* Loading overlay */
 .instagram-embed::before {
-  content: "📸 Loading...";
+  content: "📸 Loading Instagram...";
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 14px;
   color: #6b6b6b;
-  z-index: 1;
+  z-index: 10;
+  pointer-events: none;
 }
 
+.instagram-media-rendered ~ .instagram-embed::before,
 .instagram-embed iframe,
 .instagram-embed blockquote {
-  z-index: 2;
-}
-
-/* Mobile grid adjustments */
-@media (max-width: 900px) {
-  .instagram-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-  
-  .instagram-embed {
-    padding-bottom: 90%; /* Slightly taller on mobile */
-  }
-}
-
-@media (max-width: 480px) {
-  .instagram-embed {
-    padding-bottom: 85%;
-    border-radius: 8px;
-  }
-}
-
-/* =========================
-   IMAGE FIX
-========================= */
-.full-image {
-  width: 100%;
-  max-width: 1200px;
-  max-height: 55vh;
-  object-fit: contain;
-  display: block;
-  margin: 30px auto 0 auto;
-}
-
-@media (max-width: 900px) {
-  .full-image {
-    max-height: 40vh;
-  }
+  display: none !important;
 }
 
 /* =========================
@@ -283,7 +233,7 @@ html, body {
 }
 
 /* =========================
-   MOBILE FIXES
+   MOBILE CALENDAR FIXES
 ========================= */
 @media (max-width: 900px) {
   .day {
@@ -303,6 +253,10 @@ html, body {
 
   .calendar-grid {
     gap: 6px;
+  }
+
+  .instagram-embed {
+    min-height: 350px;
   }
 }
 
@@ -341,7 +295,7 @@ html, body {
     <aside class="card sidebar" id="sidebar">
 
       <div class="menu-row">
-        <button class="menu-btn" onclick="toggleMenu()" aria-label="Toggle menu">⋯</button>
+        <div class="menu-btn" onclick="toggleMenu()">⋯</div>
         <div class="menu-text" onclick="toggleMenu()">Click for links</div>
       </div>
 
@@ -359,9 +313,9 @@ html, body {
       <div class="card">
 
         <div class="calendar-header">
-          <button class="arrow" onclick="changeMonth(-1)" aria-label="Previous month">←</button>
+          <div class="arrow" onclick="changeMonth(-1)">←</div>
           <h2 id="monthTitle"></h2>
-          <button class="arrow" onclick="changeMonth(1)" aria-label="Next month">→</button>
+          <div class="arrow" onclick="changeMonth(1)">→</div>
         </div>
 
         <div class="weekdays">
@@ -381,19 +335,22 @@ html, body {
           <div class="instagram-embed">
             <blockquote class="instagram-media"
               data-instgrm-permalink="https://www.instagram.com/p/DTirPFWEZcL/"
-              data-instgrm-version="14"></blockquote>
+              data-instgrm-version="14"
+              id="ig1"></blockquote>
           </div>
 
           <div class="instagram-embed">
             <blockquote class="instagram-media"
               data-instgrm-permalink="https://www.instagram.com/p/DJ-mvVqx13X/"
-              data-instgrm-version="14"></blockquote>
+              data-instgrm-version="14"
+              id="ig2"></blockquote>
           </div>
 
           <div class="instagram-embed">
             <blockquote class="instagram-media"
               data-instgrm-permalink="https://www.instagram.com/p/DXewaGAEXFI/"
-              data-instgrm-version="14"></blockquote>
+              data-instgrm-version="14"
+              id="ig3"></blockquote>
           </div>
 
         </div>
@@ -411,109 +368,38 @@ html, body {
 <script>
 
 /* =========================
-   INSTAGRAM EMBEDS - MOBILE BULLETPROOF 🔫
+   ULTRA-SIMPLE INSTAGRAM THAT WORKS ON MOBILE
 ========================= */
-
-// Remove any existing Instagram script first
-function removeInstagramScript() {
-  const existing = document.querySelector('script[src*="instagram.com/embed.js"]');
-  if (existing) existing.remove();
-}
-
-// Super-aggressive Instagram loader
-function loadInstagramEmbeds() {
-  // Clean slate
-  removeInstagramScript();
-  
-  // Create fresh script
-  const script = document.createElement('script');
-  script.src = 'https://www.instagram.com/embed.js';
-  script.async = true;
-  script.defer = true;
-  
-  script.onload = () => {
-    // Force process MULTIPLE times with delays
-    setTimeout(() => processEmbeds(), 200);
-    setTimeout(() => processEmbeds(), 800);
-    setTimeout(() => processEmbeds(), 2000);
-  };
-  
-  script.onerror = () => {
-    // Retry on fail
-    setTimeout(loadInstagramEmbeds, 1000);
-  };
-  
-  document.head.appendChild(script);
-}
-
-function processEmbeds() {
+function initInstagram() {
+  // Simple approach that works everywhere
   if (window.instgrm && window.instgrm.Embeds) {
     window.instgrm.Embeds.process();
-    console.log('✅ Instagram embeds processed');
   }
 }
 
-// MOBILE-SPECIFIC TRIGGERS
-document.addEventListener('DOMContentLoaded', () => {
-  // Immediate load
-  setTimeout(loadInstagramEmbeds, 100);
+// Load script ONCE
+const igScript = document.createElement('script');
+igScript.src = '//www.instagram.com/embed.js';
+igScript.async = true;
+document.head.appendChild(igScript);
+
+igScript.onload = function() {
+  // Process immediately
+  initInstagram();
   
-  // Visibility change (app switch)
-  document.addEventListener('visibilitychange', () => {
-    if (!document.hidden) {
-      setTimeout(processEmbeds, 300);
-    }
-  });
-  
-  // iOS Safari specific
-  if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-    window.addEventListener('pageshow', () => {
-      setTimeout(loadInstagramEmbeds, 500);
-    });
-  }
-});
+  // Retry 5 times
+  let attempts = 0;
+  const interval = setInterval(() => {
+    initInstagram();
+    attempts++;
+    if (attempts >= 5) clearInterval(interval);
+  }, 500);
+};
 
-// Aggressive retry loop for stubborn mobile browsers
-let retryCount = 0;
-const maxRetries = 8;
-const retryInterval = setInterval(() => {
-  processEmbeds();
-  retryCount++;
-  if (retryCount >= maxRetries) {
-    clearInterval(retryInterval);
-  }
-}, 1000);
+// Also process on DOM ready
+document.addEventListener('DOMContentLoaded', initInstagram);
 
-// Resize/orientation change
-let resizeTimer;
-window.addEventListener('resize', () => {
-  clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(() => {
-    processEmbeds();
-    if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-      loadInstagramEmbeds(); // iOS needs full reload
-    }
-  }, 300);
-});
-
-// Intersection Observer (backup)
-if ('IntersectionObserver' in window) {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        setTimeout(processEmbeds, 100);
-      }
-    });
-  });
-  
-  document.querySelectorAll('.instagram-embed').forEach(el => {
-    observer.observe(el);
-  });
-}
-
-/* =========================
-   MENU
-========================= */
+/* MENU */
 function toggleMenu() {
   document.getElementById("sidebar").classList.toggle("open");
 }
@@ -643,7 +529,6 @@ function changeMonth(dir) {
   renderCalendar();
 }
 
-// Initial render
 renderCalendar();
 
 </script>
