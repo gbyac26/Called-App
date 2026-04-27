@@ -408,38 +408,100 @@ html, body {
   Powered by Jesus Christ
 </div>
 
-<script async defer src="https://www.instagram.com/embed.js"></script>
-
 <script>
 
 /* =========================
-   INSTAGRAM - SUPER ROBUST LOADING
+   INSTAGRAM EMBEDS - MOBILE BULLETPROOF 🔫
 ========================= */
-function reloadInstagramEmbeds() {
+
+// Remove any existing Instagram script first
+function removeInstagramScript() {
+  const existing = document.querySelector('script[src*="instagram.com/embed.js"]');
+  if (existing) existing.remove();
+}
+
+// Super-aggressive Instagram loader
+function loadInstagramEmbeds() {
+  // Clean slate
+  removeInstagramScript();
+  
+  // Create fresh script
+  const script = document.createElement('script');
+  script.src = 'https://www.instagram.com/embed.js';
+  script.async = true;
+  script.defer = true;
+  
+  script.onload = () => {
+    // Force process MULTIPLE times with delays
+    setTimeout(() => processEmbeds(), 200);
+    setTimeout(() => processEmbeds(), 800);
+    setTimeout(() => processEmbeds(), 2000);
+  };
+  
+  script.onerror = () => {
+    // Retry on fail
+    setTimeout(loadInstagramEmbeds, 1000);
+  };
+  
+  document.head.appendChild(script);
+}
+
+function processEmbeds() {
   if (window.instgrm && window.instgrm.Embeds) {
     window.instgrm.Embeds.process();
+    console.log('✅ Instagram embeds processed');
   }
 }
 
-// Load immediately and retry
-setTimeout(reloadInstagramEmbeds, 500);
-setTimeout(reloadInstagramEmbeds, 1500);
-setTimeout(reloadInstagramEmbeds, 3000);
+// MOBILE-SPECIFIC TRIGGERS
+document.addEventListener('DOMContentLoaded', () => {
+  // Immediate load
+  setTimeout(loadInstagramEmbeds, 100);
+  
+  // Visibility change (app switch)
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+      setTimeout(processEmbeds, 300);
+    }
+  });
+  
+  // iOS Safari specific
+  if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+    window.addEventListener('pageshow', () => {
+      setTimeout(loadInstagramEmbeds, 500);
+    });
+  }
+});
 
-// Resize handler for dynamic loading
+// Aggressive retry loop for stubborn mobile browsers
+let retryCount = 0;
+const maxRetries = 8;
+const retryInterval = setInterval(() => {
+  processEmbeds();
+  retryCount++;
+  if (retryCount >= maxRetries) {
+    clearInterval(retryInterval);
+  }
+}, 1000);
+
+// Resize/orientation change
 let resizeTimer;
 window.addEventListener('resize', () => {
   clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(reloadInstagramEmbeds, 250);
+  resizeTimer = setTimeout(() => {
+    processEmbeds();
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+      loadInstagramEmbeds(); // iOS needs full reload
+    }
+  }, 300);
 });
 
-// Intersection Observer for lazy loading
+// Intersection Observer (backup)
 if ('IntersectionObserver' in window) {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        reloadInstagramEmbeds();
-        observer.unobserve(entry.target);
+        setTimeout(processEmbeds, 100);
       }
     });
   });
@@ -449,7 +511,9 @@ if ('IntersectionObserver' in window) {
   });
 }
 
-/* MENU */
+/* =========================
+   MENU
+========================= */
 function toggleMenu() {
   document.getElementById("sidebar").classList.toggle("open");
 }
@@ -490,7 +554,7 @@ const recurringEvents = [
   }
 ];
 
-/* CALENDAR (SAFE) */
+/* CALENDAR */
 let currentDate = new Date();
 
 const months = [
@@ -579,6 +643,7 @@ function changeMonth(dir) {
   renderCalendar();
 }
 
+// Initial render
 renderCalendar();
 
 </script>
