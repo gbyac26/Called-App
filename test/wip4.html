@@ -631,10 +631,12 @@ html, body {
 
       <!-- SCROLLER PHOTOS -->
 
-<h2 class="scroll-title">Past Activities</h2>
+<div class="card">
+  <h2 class="scroll-title">Past Activities</h2>
 
-<div class="auto-scroll-wrapper">
-  <div class="auto-scroll-track" id="scrollTrack"></div>
+  <div class="auto-scroll-wrapper">
+    <div class="auto-scroll-track" id="scrollTrack"></div>
+  </div>
 </div>
       
       <!-- INSTAGRAM -->
@@ -676,10 +678,6 @@ html, body {
         </div>
       </div>
 
-    </main>
-  </div>
-</div>
-
       <!-- CALENDAR -->
       <div class="card">
         <div class="calendar-header">
@@ -695,35 +693,16 @@ html, body {
 
         <div id="calendar" class="calendar-grid"></div>
       </div>
-
-   
+       
+    </main>
+  </div>
+</div>
+ 
 <div class="footer">
   Powered by Jesus Christ
 </div>
 
 <script>
-
-
-/* SCroller */
-const folder = "../images/scroll/walk/";
-const totalImages = 20; // change this
-
-const track = document.getElementById("scrollTrack");
-
-// load images
-for (let i = 1; i <= totalImages; i++) {
-  let img = document.createElement("img");
-  img.src = folder + i + ".jpg";
-  track.appendChild(img);
-}
-
-// duplicate for seamless loop
-for (let i = 1; i <= totalImages; i++) {
-  let img = document.createElement("img");
-  img.src = folder + i + ".jpg";
-  track.appendChild(img);
-}
-
   
 /* Instagram init */
 function initInstagram() {
@@ -872,24 +851,28 @@ function changeMonth(dir) {
   renderCalendar();
 }
 
+/* SCROLLER */
+
 window.addEventListener("load", function () {
   initInstagram();
-  renderCalendar();
+  renderCalendar();   
 
-  const folder = "images/scroll/walk/"; // IMPORTANT FIX (remove ../ if needed)
-  const totalImages = 3;
-  const track = document.getElementById("scrollTrack");
+const folder = "images/scroll/walk/"; // adjust if needed
+const totalImages = 20;
 
-  if (!track) return;
+const track = document.getElementById("scrollTrack");
+if (!track) return;
 
-  let html = "";
+let html = "";
 
-  for (let i = 1; i <= totalImages; i++) {
-    html += `<img src="${folder}${i}.jpg" loading="lazy" onerror="this.style.display='none'">`;
-  }
+for (let i = 1; i <= totalImages; i++) {
+  html += `<img src="${folder}${i}.jpg" loading="lazy"
+    onerror="this.style.display='none'">`;
+}
 
-  track.innerHTML = html + html;
-});
+track.innerHTML = html + html;
+
+   });
 
 </script>
 
