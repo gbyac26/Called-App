@@ -1,0 +1,188 @@
+<!-- GBYAC PRODUCTION DASHBOARD v1 (STABLE FULL BUILD) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Green Bay Young Adult Catholic</title>
+
+<style>
+/* =========================
+   BASE RESET
+========================= */
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;overflow-x:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:#ffe888;color:#1c1c1e}
+
+/* =========================
+   LAYOUT
+========================= */
+.container{max-width:1200px;margin:auto;padding:16px}
+.layout{display:grid;grid-template-columns:280px 1fr;gap:24px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}}
+
+.card{background:#fff;border-radius:18px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,0.1);margin-bottom:20px}
+
+.hero{text-align:center;padding:30px}
+.hero h1{margin:0;font-size:2rem}
+
+/* =========================
+   SIDEBAR
+========================= */
+.sidebar{background:#fff;border-radius:18px;overflow:hidden}
+.sidebar-header{background:linear-gradient(135deg,#7b2ff7,#a855f7);color:#fff;padding:18px;text-align:center}
+.menu-row{display:flex;justify-content:space-between;align-items:center;padding:14px;cursor:pointer;background:#f4f4ff}
+.menu-btn{font-size:24px}
+.sidebar-links{padding:10px 14px}
+.nav-link{display:block;padding:12px;margin-bottom:10px;border-radius:12px;background:#f2f2f7;text-decoration:none;color:#1c1c1e;font-weight:500}
+.nav-link:hover{background:#7b2ff7;color:#fff}
+@media(min-width:901px){.menu-row{display:none}.sidebar-links{display:block!important}}
+@media(max-width:900px){.sidebar-links{display:none}.sidebar.open .sidebar-links{display:block}}
+
+/* =========================
+   CALENDAR
+========================= */
+.calendar-header{display:flex;justify-content:space-between;align-items:center}
+.arrow{cursor:pointer;padding:10px;background:#f2f2f7;border-radius:10px}
+.weekdays{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;font-weight:600;font-size:12px;margin-top:10px}
+.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:10px}
+.day{min-height:90px;background:#f2f2f7;border-radius:10px;padding:6px;font-size:12px}
+.day.today{background:#7b2ff7;color:#fff}
+.event{background:#a855f7;color:#fff;font-size:10px;padding:3px;border-radius:6px;margin-top:3px}
+
+/* =========================
+   SCROLLER
+========================= */
+.auto-scroll-wrapper{overflow:hidden}
+.auto-scroll-track{display:flex;gap:10px;width:max-content;animation:scroll 25s linear infinite}
+.auto-scroll-track img{height:140px;border-radius:10px}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.auto-scroll-track:hover{animation-play-state:paused}
+
+/* =========================
+   INSTAGRAM
+========================= */
+.instagram-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:900px){.instagram-grid{grid-template-columns:1fr}}
+.instagram-embed{position:relative;aspect-ratio:4/5;background:#eee;border-radius:12px;overflow:hidden}
+.instagram-static{width:100%;height:100%;object-fit:cover;display:none}
+@media(max-width:900px){.instagram-static{display:block}}
+
+.footer{text-align:center;font-size:12px;margin:20px;color:#666}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<div class="card hero">
+<h1>Green Bay Young Adult Catholic</h1>
+<p>Events for 18–30</p>
+</div>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+<aside class="card sidebar" id="sidebar">
+<div class="sidebar-header">Quick Links</div>
+<div class="menu-row" onclick="toggleMenu()">
+<div class="menu-btn">☰</div>
+<div>Menu</div>
+</div>
+<div class="sidebar-links">
+<a class="nav-link" href="#">Submit Event</a>
+<a class="nav-link" href="#">Join App</a>
+<a class="nav-link" href="#">Library</a>
+<a class="nav-link" href="#">Contact</a>
+</div>
+</aside>
+
+<main>
+
+<!-- CALENDAR -->
+<div class="card">
+<div class="calendar-header">
+<div class="arrow" onclick="changeMonth(-1)">←</div>
+<h3 id="monthTitle"></h3>
+<div class="arrow" onclick="changeMonth(1)">→</div>
+</div>
+<div class="weekdays">
+<div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+</div>
+<div id="calendar" class="calendar-grid"></div>
+</div>
+
+<!-- SCROLLER -->
+<h3>Past Activities</h3>
+<div class="auto-scroll-wrapper">
+<div class="auto-scroll-track" id="scrollTrack"></div>
+</div>
+
+<!-- INSTAGRAM -->
+<div class="card">
+<h3>Instagram</h3>
+<div class="instagram-grid">
+<div class="instagram-embed"><img class="instagram-static" src="../images/insta1.jpg"></div>
+<div class="instagram-embed"><img class="instagram-static" src="../images/insta2.jpg"></div>
+<div class="instagram-embed"><img class="instagram-static" src="../images/insta3.jpg"></div>
+</div>
+</div>
+
+</main>
+</div>
+</div>
+
+<div class="footer">Powered by Faith</div>
+
+<script>
+
+function toggleMenu(){
+ const s=document.getElementById('sidebar');
+ s.classList.toggle('open');
+}
+
+const events=[
+{date:'2026-05-10',name:'Bible Study'},
+{date:'2026-05-15',name:'Mass Night'}
+];
+
+let current=new Date();
+const months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+function render(){
+const cal=document.getElementById('calendar');
+cal.innerHTML='';
+let y=current.getFullYear();
+let m=current.getMonth();
+document.getElementById('monthTitle').innerText=months[m]+" "+y;
+let first=new Date(y,m,1).getDay();
+let days=new Date(y,m+1,0).getDate();
+
+for(let i=0;i<first;i++)cal.innerHTML+='<div></div>';
+
+for(let d=1;d<=days;d++){
+let date=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+let today=new Date().toDateString();
+let thisDay=new Date(date).toDateString();
+
+let html=`<div class='day ${today===thisDay?'today':''}'><b>${d}</b>`;
+
+events.forEach(e=>{if(e.date===date)html+=`<div class='event'>${e.name}</div>`});
+html+='</div>';
+cal.innerHTML+=html;
+}
+}
+
+function changeMonth(i){current.setMonth(current.getMonth()+i);render();}
+
+window.onload=function(){
+render();
+const t=document.getElementById('scrollTrack');
+let imgs='';
+for(let i=1;i<=10;i++)imgs+=`<img src='../images/scroll/${i}.jpg'>`;
+t.innerHTML=imgs+imgs;
+}
+
+</script>
+
+</body>
+</html>
