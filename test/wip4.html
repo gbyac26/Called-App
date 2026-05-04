@@ -15,21 +15,28 @@
 .auto-scroll-wrapper {
   overflow: hidden;
   width: 100%;
-  padding: 10px 0;
 }
 
 .auto-scroll-track {
   display: flex;
   gap: 12px;
   width: max-content;
-  animation: scrollLoop 30s linear infinite;
+  will-change: transform;
+  animation: scrollLoop 35s linear infinite;
 }
 
 .auto-scroll-track img {
-  height: 180px;
+  height: 140px;
+  width: auto;
   border-radius: 12px;
   flex-shrink: 0;
   object-fit: cover;
+}
+
+@media (max-width: 600px) {
+  .auto-scroll-track img {
+    height: 110px;
+  }
 }
 
 @keyframes scrollLoop {
@@ -69,9 +76,9 @@ html, body {
    LAYOUT
 ========================= */
 .container {
+  width: 100%;
   max-width: 1200px;
-  margin: auto;
-  padding: 16px;
+  margin: 0 auto;
 }
 
 .layout {
@@ -104,7 +111,12 @@ html, body {
 ========================= */
 .hero {
   text-align: center;
-  padding: 32px 24px;
+  padding: 24px 16px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
 }
 
 .hero h1 {
@@ -864,22 +876,19 @@ window.addEventListener("load", function () {
   initInstagram();
   renderCalendar();
 
-  /* SCROLLER */
-  const folder = "../images/scroll/walk/";
+  const folder = "images/scroll/walk/"; // IMPORTANT FIX (remove ../ if needed)
   const totalImages = 20;
-
   const track = document.getElementById("scrollTrack");
 
-  if (track) {
-    let imagesHTML = "";
+  if (!track) return;
 
-    for (let i = 1; i <= totalImages; i++) {
-      imagesHTML += `<img src="${folder}${i}.jpg">`;
-    }
+  let html = "";
 
-    // duplicate for seamless loop
-    track.innerHTML = imagesHTML + imagesHTML;
+  for (let i = 1; i <= totalImages; i++) {
+    html += `<img src="${folder}${i}.jpg" loading="lazy" onerror="this.style.display='none'">`;
   }
+
+  track.innerHTML = html + html;
 });
 
 </script>
