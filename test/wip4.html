@@ -40,7 +40,15 @@
   .auto-scroll-track:hover {
   animation-play-state: paused;
 }
-  
+
+.scroll-title {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 700;
+  margin: 30px 0 10px;
+}
+
+   
 /* =========================
    GLOBAL SAFETY FIX
 ========================= */
@@ -855,20 +863,23 @@ function changeMonth(dir) {
 window.addEventListener("load", function () {
   initInstagram();
   renderCalendar();
-});
 
-window.addEventListener("resize", function() {
-  clearTimeout(window.resizeTimer);
-  window.resizeTimer = setTimeout(function() {
-    initInstagram();
-    // Close mobile menu on resize to desktop
-    const sidebar = document.getElementById("sidebar");
-    if (window.innerWidth > 900 && sidebar.classList.contains('open')) {
-      sidebar.classList.remove('open');
-      const links = sidebar.querySelector('.sidebar-links');
-      links.style.maxHeight = '0';
+  /* SCROLLER */
+  const folder = "../images/scroll/walk/";
+  const totalImages = 20;
+
+  const track = document.getElementById("scrollTrack");
+
+  if (track) {
+    let imagesHTML = "";
+
+    for (let i = 1; i <= totalImages; i++) {
+      imagesHTML += `<img src="${folder}${i}.jpg">`;
     }
-  }, 250);
+
+    // duplicate for seamless loop
+    track.innerHTML = imagesHTML + imagesHTML;
+  }
 });
 
 </script>
