@@ -33,9 +33,6 @@
 ##### - ~~Books!~~ DONE
 ##### - ~~Search freeze.~~ DONE
 ##### - New Landing Page.
-#####   - add event photos
-#####   - add events.
-#####   - add links.
 
 ## Landing Page Ideas
 ##### - ~~Calander of events / how to scrape called for events.~~ DONE
@@ -48,6 +45,6 @@
 #####   - ~~Sharing events for Catholics 18-30(ish).~~ DONE
 #####   - ~~Not affiliated with any parish or diocese.~~ DONE
 #####   - ~~Submit an event or join our group!~~ DONE
-
+##### - add event photos
 
 https://docs.google.com/forms/d/e/1FAIpQLSfOKSmuxzjS7oucfldS486q_jPCTnAGigDZqHCjBiE_RQUmWQ/viewform?pli=1
