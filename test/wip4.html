@@ -15,6 +15,9 @@
 .auto-scroll-wrapper {
   overflow: hidden;
   width: 100%;
+  padding: 12px;
+  background: #f2f2f7;
+  border-radius: 14px;
 }
 
 .auto-scroll-track {
@@ -23,6 +26,7 @@
   width: max-content;
   will-change: transform;
   animation: scrollLoop 35s linear infinite;
+     align-items: center;
 }
 
 .auto-scroll-track img {
@@ -31,6 +35,7 @@
   border-radius: 12px;
   flex-shrink: 0;
   object-fit: cover;
+  display: block;
 }
 
 @media (max-width: 600px) {
