@@ -767,8 +767,8 @@ main .card {
 }
 
 .auto-scroll-track img {
-  height: 120px;        /* key fix */
-  max-height: 120px;
+  height: 180px;        /* key fix */
+  max-height: 180px;
   width: auto;
   object-fit: cover;
   flex-shrink: 0;
