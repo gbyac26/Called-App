@@ -748,27 +748,32 @@ main .card {
      (removes bottom whitespace)
   ========================= */
 
-  .past-activities {
-    min-height: unset;
-  }
+/* =========================
+   FIXED MOBILE SCROLLER
+========================= */
 
-  .auto-scroll-wrapper {
-    padding: 10px;
-    height: 100%;
-  }
+.past-activities {
+  min-height: unset;
+}
 
-  .auto-scroll-track {
-    height: 100%;
-    align-items: stretch;
-  }
+.auto-scroll-wrapper {
+  padding: 10px;
+  height: auto;
+  line-height: 0;
+}
 
-  .auto-scroll-track img {
-    height: 100%;
-    max-height: none;
-    width: auto;
-    object-fit: cover;
-    border-radius: 12px;
-  }
+.auto-scroll-track {
+  align-items: center;
+}
+
+.auto-scroll-track img {
+  height: 120px;        /* key fix */
+  max-height: 120px;
+  width: auto;
+  object-fit: cover;
+  flex-shrink: 0;
+  border-radius: 12px;
+}
 }
     
   </style>
