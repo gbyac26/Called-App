@@ -83,6 +83,10 @@
       color: #1c1c1e;
     }
 
+:root {
+  --card-width: 850px;
+}
+    
     /* =========================
    LAYOUT
 ========================= */
@@ -96,7 +100,7 @@
       display: grid;
       grid-template-columns: 260px 1fr;
       gap: 32px;
-      align-items: start;
+align-items: stretch;
       max-width: 1100px;
       /* 👈 controls total width */
       margin: 0 auto;
@@ -118,12 +122,11 @@
       /* centers cards */
     }
 
-    main .card {
-      width: 100%;
-      max-width: 850px;
-      /* SAME visual width for all cards */
-    }
-
+main .card {
+  width: 100%;
+  max-width: var(--card-width);
+}
+    
     /* =========================
    CARDS
 ========================= */
@@ -139,17 +142,17 @@
     /* =========================
    HERO
 ========================= */
-    .hero {
-      text-align: center;
-      padding: 24px 16px;
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(12px);
-      max-width: 850px;
-      margin: 0 auto 20px auto;
-    }
+.hero {
+  text-align: center;
+  padding: 24px 16px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  max-width: var(--card-width);
+  margin: 0 auto 20px auto;
+}
 
     .hero h1 {
       font-size: 2.2em;
@@ -163,14 +166,14 @@
     /* =========================
    GORGEOUS SIDEBAR
 ========================= */
-    .sidebar {
-      position: relative;
-      background: linear-gradient(145deg, #fff, #f8f9ff);
-      border-radius: 20px;
-      border: 1px solid rgba(123, 47, 247, 0.1);
-      overflow: hidden;
-      height: fit-content;
-    }
+.sidebar {
+  position: relative;
+  background: linear-gradient(145deg, #fff, #f8f9ff);
+  border-radius: 20px;
+  border: 1px solid rgba(123, 47, 247, 0.1);
+  overflow: hidden;
+  height: 100%;
+}
 
     .sidebar::before {
       content: '';
@@ -695,6 +698,31 @@
     .auto-scroll-track {
       align-items: center;
     }
+
+    @media (max-width: 600px) {
+
+  .card {
+    padding: 14px;
+    border-radius: 16px;
+  }
+
+  .hero h1 {
+    font-size: 1.6em;
+  }
+
+  .day {
+    min-height: 70px;
+  }
+
+  .calendar-grid {
+    gap: 6px;
+  }
+
+  main .card {
+    max-width: 100%;
+  }
+}
+    
   </style>
 </head>
 
