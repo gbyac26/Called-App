@@ -3,20 +3,20 @@
 #### This whole branch is live for all addresses respectivly.
 
 # LIVE PAGES!
-## **!!!GBYAC.com IS LIVE (COPY OF OLD CALLED.html BUT NO BACK BUTTON)!!!**
-## **!!!GBYAC.com/Called.html IS LIVE!!!**
+### **!!!GBYAC.com IS LIVE (COPY OF OLD CALLED.html BUT NO BACK BUTTON)!!!**
+### **!!!GBYAC.com/Called.html IS LIVE!!!**
 ### **!!!GBYAC.com home page IS ALMOST LIVE!!!**
-#### **!!!GBYAC.com/books.html IS LIVE!!!**
+### **!!!GBYAC.com/books.html IS LIVE!!!**
 
-##### License is CC.
+### License is CC.
 
-## All FOLDERS.
+# All FOLDERS.
 ##### pdf = PDF storage.
 ##### images = Picture storage.
 ##### Parts to Create Books Page = Files for books page creation.
 ##### test = All work in progress pages.
 
-## All FILES.
+# All FILES.
 ##### index.md = Landing page.
 ##### ReadAboutMe.md = Markdown file to explain.
 ##### Pegasus.html = Meme.
@@ -25,7 +25,7 @@
 ##### define.html = Definition/image test.
 ##### wip(#).html = WIP pages.
 
-## ToDo List Possibilities.
+# ToDo List Possibilities.
 ### ~~Called link Page~~ DONE
 ##### - ~~Domain for GBYAC.com $11.08.~~ DONE
 #####   - ~~Can be hosted on Github for free.~~ DONE
@@ -39,7 +39,7 @@
 ##### - ~~New Landing Page.~~ DONE
 ##### - ~~Add back button to books page.~~ DONE
 
-## Landing Page Ideas.
+# Landing Page Ideas.
 ##### - ~~Calander of events / how to scrape called for events.~~ DONE
 #####   - Add more events.
 ##### - ~~Instagram top 3 post embeded.~~ DONE
@@ -52,5 +52,5 @@
 #####   - ~~Submit an event or join our group!~~ DONE
 ##### - ~~Add event photos.~~ DOINE
 
-## Link For Suggestions.
+# Link For Suggestions.
 ##### https://docs.google.com/forms/d/e/1FAIpQLSfOKSmuxzjS7oucfldS486q_jPCTnAGigDZqHCjBiE_RQUmWQ/viewform?pli=1
