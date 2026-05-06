@@ -8,8 +8,6 @@
 #### **!!!GBYAC.com home page IS ALMOST LIVE!!!**
 #### **!!!GBYAC.com/books.html IS LIVE!!!**
 
-#### License is CC.
-
 ## All FOLDERS.
 #### pdf = PDF storage.
 #### images = Picture storage.
@@ -54,3 +52,7 @@
 
 ## Link For Suggestions.
 #### https://docs.google.com/forms/d/e/1FAIpQLSfOKSmuxzjS7oucfldS486q_jPCTnAGigDZqHCjBiE_RQUmWQ/viewform?pli=1
+
+## License Type:
+#### MIT
+#### 
