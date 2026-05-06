@@ -2,6 +2,9 @@
 #### All of the links are ment to be used for NFC tags to help spread awareness.
 #### This whole branch is live for all addresses respectivly.
 
+## License Type:
+#### MIT
+
 ## LIVE PAGES!
 #### **!!!GBYAC.com IS LIVE (COPY OF OLD CALLED.html BUT NO BACK BUTTON)!!!**
 #### **!!!GBYAC.com/Called.html IS LIVE!!!**
@@ -13,6 +16,7 @@
 #### images = Picture storage.
 #### Parts to Create Books Page = Files for books page creation.
 #### test = All work in progress pages.
+#### images/scroll/walk = Picture storage for the index pages photo scroller.
 
 ## All FILES.
 #### index.md = Landing page.
@@ -22,6 +26,8 @@
 #### books.html = Links to books!
 #### define.html = Definition/image test.
 #### wip(#).html = WIP pages.
+#### CNAME = Site to where Github pages redirects to.
+#### LICENSE = License statement/type.
 
 ## ToDo List Possibilities.
 #### - ~~Called link Page~~ DONE
@@ -52,7 +58,3 @@
 
 ## Link For Suggestions.
 #### https://docs.google.com/forms/d/e/1FAIpQLSfOKSmuxzjS7oucfldS486q_jPCTnAGigDZqHCjBiE_RQUmWQ/viewform?pli=1
-
-## License Type:
-#### MIT
-#### 
