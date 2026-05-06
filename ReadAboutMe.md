@@ -5,8 +5,8 @@
 # LIVE PAGES!
 ## **!!!GBYAC.com IS LIVE (COPY OF OLD CALLED.html BUT NO BACK BUTTON)!!!**
 ## **!!!GBYAC.com/Called.html IS LIVE!!!**
-## **!!!GBYAC.com home page IS ALMOST LIVE!!!**
-## **!!!GBYAC.com/books.html IS LIVE!!!**
+### **!!!GBYAC.com home page IS ALMOST LIVE!!!**
+#### **!!!GBYAC.com/books.html IS LIVE!!!**
 
 ##### License is CC.
 
