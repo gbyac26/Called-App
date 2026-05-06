@@ -2,11 +2,11 @@
 #### All of the links are ment to be used for NFC tags to help spread awareness.
 #### This whole branch is live for all addresses respectivly.
 
-
-# **!!!GBYAC.com IS LIVE (COPY OF OLD CALLED.html BUT NO BACK BUTTON)!!!**
-# **!!!GBYAC.com/Called.html IS LIVE!!!**
-# **!!!GBYAC.com home page IS ALMOST LIVE!!!**
-# **!!!GBYAC.com/books.html IS LIVE!!!**
+# LIVE PAGES!
+## **!!!GBYAC.com IS LIVE (COPY OF OLD CALLED.html BUT NO BACK BUTTON)!!!**
+## **!!!GBYAC.com/Called.html IS LIVE!!!**
+## **!!!GBYAC.com home page IS ALMOST LIVE!!!**
+## **!!!GBYAC.com/books.html IS LIVE!!!**
 
 ##### License is CC.
 
